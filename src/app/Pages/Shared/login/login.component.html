@@ -1,0 +1,26 @@
+<div class="card" *ngIf="hasAccount" >
+    <form [formGroup] = "loginform" (ngSubmit)="log()"  >
+        <h2>Connexion</h2>
+        <input type="text" formControlName ="email" name="email" placeholder="Email" />
+        <input type="password" formControlName ="password" name="password" placeholder="Mots de passe" />
+        <button type="submit">Connexion</button>
+        <p class="signup"> Vous n'avez pas de compte ?
+        <button class = "signUp" (click)="changeOption()">S' inscrire</button>
+        </p>
+    </form>
+</div>
+
+<div class="card" *ngIf="!clients">
+    <h1 *ngFor="let cli ofclients">{{cli.email}}</h1>
+    <!-- <form [formGroup] = "signUpForm" (ngSubmit)="signUp()"  >
+        <h2>Inscription</h2>
+        <input type="text" formControlName ="firstname" name="firstname" placeholder="Nom" />
+        <input type="text" formControlName ="lastname" name="lastname" placeholder="Prénoms" />
+        <input type="text" formControlName ="email" name="email" placeholder="Email" />
+        <input type="password" formControlName ="password" name="password" placeholder="Mots de passe" />
+        <button type="submit">Valider</button>
+        <p class="signup"> Vous avez déjà un compte ?
+        <button class = "signUp" (click)="changeOption()">Se connecter</button>
+        </p>
+    </form> -->
+</div>
