@@ -2,7 +2,6 @@ import { Login } from './../../../Models/login';
 import { SharedService } from './../../../Services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Token } from '../../../Models/token';
 import { Client } from '../../../Models/client';
 
 @Component({
@@ -49,7 +48,7 @@ export class LoginComponent implements OnInit {
     let lastname = this.signUpForm.get("lastname")?.value;
     let email = this.signUpForm.get("email")?.value;
     let password = this.signUpForm.get("password")?.value;
-    this.client = new Client(email,password);
+    this.client = new Client(firstname,lastname,email,password);
   }
 
   public log(): void{
