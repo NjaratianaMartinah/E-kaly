@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  public changeOption(){
+  public changeOption(): void{
     this.hasAccount = !this.hasAccount;
   }
 
