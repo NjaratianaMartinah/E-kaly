@@ -157,7 +157,7 @@ a {
     position: relative;
     z-index: 1;
     width: 100%;
-    opacity: 0;
+    opacity: 1;
     overflow: hidden;
     -webkit-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
@@ -173,7 +173,7 @@ a {
     transform: translateY(50px);
   }
   .fxt-template-animation .fxt-transformX-L-50 {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateX(-50px);
     -ms-transform: translateX(-50px);
     transform: translateX(-50px);
