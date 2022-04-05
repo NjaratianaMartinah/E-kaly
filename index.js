@@ -4,12 +4,12 @@ const path= require('path');
 
 app.get('/ekaly/*', (req, res) => {
   console.log("Ok ok");
-  res.sendFile(path.join(__dirname, 'dist/ekaly-front/index.html'))
+  res.sendFile(path.join(__dirname, 'dist/ekaly-fo/index.html'))
 });
 
 app.get('/ekaly/', (req, res) =>{
   console.log("Ok ok");
-  res.sendFile(path.join(__dirname, 'dist/ekaly-front/index.html'))
+  res.sendFile(path.join(__dirname, 'dist/ekaly-fo/index.html'))
 });
 
 main();

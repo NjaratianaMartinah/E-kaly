@@ -11,7 +11,6 @@ async function login({ email, password }) {
   }
 }
 
-
 async function register(params){
   const {password} = params
   const salt = bcrypt.genSaltSync(10);

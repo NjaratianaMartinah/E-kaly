@@ -1,3 +1,4 @@
+import { RestaurantCrudComponent } from './Pages/Ekaly/restaurant-crud/restaurant-crud.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
@@ -7,11 +8,11 @@ import { LoginComponent } from './Pages/Shared/login/login.component';
 
 const routes: Routes = [
   { 
-    path: 'ekaly/login', 
+    path: '', 
     component: LoginComponent
   },
   { 
-    path: 'ekaly/Accueil', 
+    path: 'acceuil', 
     component: DefaultLayoutComponent,
     children:[
       {
@@ -19,8 +20,12 @@ const routes: Routes = [
         component:MenuComponent
       },
       {
-        path:"Panier",
+        path:"panier",
         component:PanierComponent
+      },
+      {
+        path:"restaurants",
+        component:RestaurantCrudComponent
       }
     ]
   },
