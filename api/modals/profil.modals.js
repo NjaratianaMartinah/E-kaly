@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const plat = require("./plat.modals");
+
 
 const ProfilSchema = new Schema({
     firstname: {
@@ -8,21 +10,58 @@ const ProfilSchema = new Schema({
     },
     lastname:{
       type: String,
-      required: false,
+      required: false
+    },
+    avatar:{
+      type: String,
+      required : false
     },
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true,
+        required: true
     },
     phonenumber: {
       type: String,
-      required: false,
+      required: false
+    },
+    plats: [ plat ],
+    type:{
+      type: String,
+      required: true
     }
+},  { shardkey :{ email : 1} });
+
+const ProfilBean = new Schema({
+  firstname: {
+    type: String,
+    required: false,
+  },
+  lastname:{
+    type: String,
+    required: false,
+  },
+  email: {
+      type: String,
+      required: false
+  },
+  password: {
+      type: String,
+      required: false,
+  },
+  phonenumber: {
+    type: String,
+    required: false,
+  },
+  plats: [ plat ],
+  type:{
+    type: String,
+    required: true
+  }
 });
 
 ProfilSchema.set('toJSON', {
@@ -37,4 +76,7 @@ ProfilSchema.set('toJSON', {
 
 const Profil =  mongoose.model("profil", ProfilSchema);
 
-module.exports = Profil;
+module.exports = {
+  Profil,
+  ProfilSchema
+};
