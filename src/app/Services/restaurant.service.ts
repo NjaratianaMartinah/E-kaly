@@ -18,10 +18,12 @@ export class RestaurantService {
   }
 
   public findRestaurantById(restaurant: any): Observable<Response>{
-
     return this.http.get<Response>(this.url.concat("/user/"+restaurant))
   }
 
+  public addPlat(platData: FormData): Observable<Response>{ 
+    return this.http.post<Response>(`${this.url}/restaurants/addPlat`, platData);
+  } 
 
   public deleteRestaurant(restaurant: Profil): Observable<Response>{
     return this.http.post<Response>(`${this.url}/restaurants/delete`, restaurant);

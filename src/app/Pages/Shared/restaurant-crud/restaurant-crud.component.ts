@@ -51,7 +51,6 @@ export class RestaurantCrudComponent implements OnInit {
   }
 
   public initForm(): void{
-    // this.restaurant = new Profil("",PROFIL_TYPE.restaurant,"","","","","","");
     this.restaurant = new Profil("",PROFIL_TYPE.restaurant,"pho@gmail.com","123456","Pho","Pho","12343","");
     this.action = true;
     this.setForm();
@@ -74,8 +73,6 @@ export class RestaurantCrudComponent implements OnInit {
 
   public addRestaurant(): void{
     let profil: Profil = this.getFormValue();
-    // profil.type = PROFIL_TYPE.restaurant;
-    // profil.status = true;
     this.formData.set("restaurant",JSON.stringify(profil));
     console.log(this.formData.get("restaurant"));
     console.log(this.formData.get("avatar"));

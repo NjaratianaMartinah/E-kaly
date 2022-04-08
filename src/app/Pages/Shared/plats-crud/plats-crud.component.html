@@ -29,7 +29,7 @@
 			<div class="col-md-4"></div>
 			<!-- Button -->
 			<div class="col-md-4 text-right" data-toggle="modal" data-target="#exampleModal">
-				<button class="btn btn-md btn-salmon tra-salmon-hover" (click)="initForm()"  ><i class="fa fa-plus"></i> Nouveau Resto</button>
+				<button class="btn btn-md btn-salmon tra-salmon-hover" (click)="initForm()"  ><i class="fa fa-plus"></i> Nouveau plat</button>
 			</div>
 		</div>	  <!-- END CART CHECKOUT -->
 
@@ -53,18 +53,18 @@
 								<td data-label="Resto" class="product-name">
 
 									<!-- Preview -->
-									<div class="cart-product-img"><img [src]="plat.photo" alt="cart-preview"></div>
+									<div class="cart-product-img"><img [src]="plat.avatar" alt="cart-preview"></div>
 
 									<!-- Description -->
 									<div class="cart-product-desc">
-										<h5 class="h5-sm">{{plat.name}}</h5>
+										<h5 class="h5-sm">{{plat.designation}}</h5>
 									</div>
 
 								</td>
-                                <td data-label="Numero" class="product-qty">{{plat.bought}}</td>
-                                <td data-label="Numero" class="product-qty">{{plat.price}}</td>
-								<td data-label="Modifier" class="td-trash"><i class="fa fa-pen" (click)="setModalStatus(resto)" data-toggle="modal" data-target="#exampleModal"></i></td>
-								<td data-label="Supprimer" class="td-trash"><i class="far fa-trash-alt" (click)="set()"  data-toggle="modal" data-target="#deleteModal"></i></td>
+                                <td data-label="Numero" class="product-qty">{{plat.buyprice}}</td>
+                                <td data-label="Numero" class="product-qty">{{plat.sellprice}}</td>
+								<td data-label="Modifier" class="td-trash"><i class="fa fa-pen" (click)="setModalStatus(plat)" data-toggle="modal" data-target="#exampleModal"></i></td>
+								<td data-label="Supprimer" class="td-trash"><i class="far fa-trash-alt" (click)="confirmDelete(plat)"  data-toggle="modal" data-target="#deleteModal"></i></td>
 							</tr>
 						</tbody>
 					</table>
@@ -101,29 +101,28 @@
 					                <!-- Form Input -->
 					                 <div class="col-lg-12">
 										<label>Nom: </label>
-					                	<input type="text" formControlName="name" class="form-control" placeholder="Plat" required>
+					                	<input type="text" formControlName="designation" class="form-control" placeholder="Plat" required>
 					                </div>
 											
 									<!-- Form Input -->
 					                <div class="col-lg-6">
 										<label>Prix: </label>
-					                	<input type="text" formControlName="price" class="form-control phone" placeholder="Prix" required> 
+					                	<input type="number" formControlName="sellprice" class="form-control" placeholder="Prix" required> 
 					                </div>
 					                  
 					                <!-- Form Input -->        
 					                <div class="col-lg-6">
 										<label>Prix d'achat: </label>
-					                	<input type="email" formControlName="bought" class="form-control" placeholder="prix d'achat" required> 
+					                	<input type="number" formControlName="buyprice" class="form-control" placeholder="prix d'achat" required> 
 					                </div>
 
-                                    <!-- Form Textarea -->	        
-					                <div class="col-md-12">
+                                    <div class="col-md-12">
                                         <div class="custom-file">
 											<label>Photo :</label>
-                                            <input type="file" formControlName="photo" class="custom-file-input" id="customFile">
+                                            <input type="file" (change)="selectFile($event)" class="custom-file-input" id="customFile">
                                             <label class="custom-file-label" for="customFile">Photo</label>
                                         </div>
-                                    </div>  
+                                    </div> 
 
 					                <!-- Form Input -->   
 					                <div class="col-lg-12">
@@ -149,7 +148,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-md btn-red tra-red-hover" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-md btn-salmon tra-salmon-hover" data-dismiss="modal" (click)="addPlate">Ajouter</button>
+          <button type="button" class="btn btn-md btn-salmon tra-salmon-hover" data-dismiss="modal" (click)="addPlate()">Ajouter</button>
         </div>
       </div>
     </div>
@@ -168,7 +167,7 @@
 		  </button>
 		</div>
 		<div class="modal-body">
-			Vous voulez vraiment supprimer {{plat[indice].name}} ?
+			Vous voulez vraiment supprimer {{plat.designation}} ?
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-md btn-red tra-red-hover" data-dismiss="modal">

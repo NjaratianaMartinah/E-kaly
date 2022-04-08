@@ -1,9 +1,9 @@
 export class Plat {
-    public name: string;
-    public price: number;
-    public bought: number;
+    public designation: string;
+    public sellprice: number;
+    public buyprice: number;
     public description: string;
-    public photo: string;
+    public avatar: string;
 
     constructor(
         name: string,
@@ -12,10 +12,10 @@ export class Plat {
         description: string,
         photo: string
     ){
-        this.name = name;
-        this.price = price;
-        this.bought = bought;
+        this.designation = name;
+        this.sellprice = price;
+        this.buyprice = bought;
         this.description = description;
-        this.photo = photo
+        this.avatar = photo
     }
 }

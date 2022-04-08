@@ -17,6 +17,15 @@ const PlatSchema = new Schema({
   buyprice:{
     type:Number,
     required: true
+  },
+  description:{
+    type: String,
+    required: false
+  },
+  status:{
+    type: Boolean,
+    required: true,
+    default: true
   }
 });
 

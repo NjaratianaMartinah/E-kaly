@@ -10,6 +10,8 @@ const restaurantController = ( url ,router ) => {
 
   router.post(`${url}/addPlat`, (req, res) => {
     var restaurant = req.body;
+    console.log(restaurant);
+    console.log(req.files);
     var files = req.files;
     restaurant.plat = JSON.parse(restaurant.plat);
     restaurantService.addPlates(restaurant, files).then( (restaurant) => response.success(res, restaurant, "Add plat success")  );

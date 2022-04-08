@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment';
+import { Plat } from 'src/app/Models/plat';
 import { Response } from './../../../Models/token';
 import { RestaurantService } from './../../../Services/restaurant.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +14,9 @@ import { Profil } from 'src/app/Models/profil';
 export class MenuComponent implements OnInit {
 
   restaurant!: Profil;
+  plats: Array<Plat> | undefined= [];
+  uploadUrl: string = environment.upload;
+
   constructor(
     private activRoute: ActivatedRoute,
     private restoServ: RestaurantService
@@ -27,6 +32,10 @@ export class MenuComponent implements OnInit {
         console.log(res);
           if(res.code === 202){
             this.restaurant = res.data;
+            this.plats = this.restaurant.plats;
+            this.plats?.forEach(plat => {
+              plat.avatar = this.uploadUrl.concat("/"+plat.avatar);
+            });
           }
         }
        );

@@ -45,18 +45,16 @@ export class PlatsCrudComponent implements OnInit {
 
   public setForm(): void{
     this.platesForm = this.builder.group({
-      name : [this.plat.name,Validators.required],
-      price : [this.plat.price,Validators.required],
-      bought : [this.plat.bought,Validators.required],
+      designation : [this.plat.designation,Validators.required],
+      sellprice : [this.plat.sellprice,Validators.required],
+      buyprice : [this.plat.buyprice,Validators.required],
       description : [this.plat.description,Validators.required],
-      photo:[this.plat.photo,Validators.required]
+      avatar:[this.plat.avatar,Validators.required]
     });
   }
 
   public initForm(): void{
-    // this.restaurant = new Profil("",PROFIL_TYPE.restaurant,"","","","","","");
-    // this.restaurant = new Profil("",PROFIL_TYPE.restaurant,"pho@gmail.com","123456","Pho","Pho","12343","");
-    this.plat =  new Plat("Burger",100,200,"Burger Burger","Burger"),
+    this.plat =  new Plat("Burger",100,200,"Burger Burger",""),
     this.action = true;
     this.setForm();
   }
@@ -82,20 +80,20 @@ export class PlatsCrudComponent implements OnInit {
   }
 
   public addPlate(): void{
-    let profil: Profil = this.getFormValue();
-    this.formData.set("restaurant",JSON.stringify(profil));
+    let plat: Plat = this.getFormValue();
+    this.formData.set("id",this.restaurant.id);
+    this.formData.set("plat",JSON.stringify(plat));
     console.log(this.formData.get("restaurant"));
-    console.log(this.formData.get("photo"));
     if(this.action){
-        this.profilServ.createProfil(this.formData).subscribe((res: Response) =>console.log(res));
+        this.restaurantServ.addPlat(this.formData).subscribe((res: Response) =>console.log(res));
     }else{
-      this.profilServ.editProfil(this.formData).subscribe((res: Response) => console.log(res));
+      // this.restaurantServ.editPlat(this.formData).subscribe((res: Response) => console.log(res));
     }
   }
 
   public selectFile(event: any){
     let file = event.target.files;
-    this.formData.set("photo", file[0]);
+    this.formData.set("avatar", file[0]);
   }
 
   confirmDelete(plat: Plat){
