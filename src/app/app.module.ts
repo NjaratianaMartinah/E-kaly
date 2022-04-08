@@ -8,6 +8,8 @@ import { LoginComponent } from './Pages/Shared/login/login.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
+import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
+import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { PanierComponent } from './Pages/Client/panier/panier.component';
     LoginComponent,
     DefaultLayoutComponent,
     MenuComponent,
-    PanierComponent
+    PanierComponent,
+    RestaurantCrudComponent,
+    PlatsCrudComponent
   ],
   imports: [
     BrowserModule,

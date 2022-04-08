@@ -1,8 +1,12 @@
+import { PROFIL_TYPE } from './../../../Models/shared';
+import { ProfilService } from './../../../Services/profil.service';
+import { Response } from './../../../Models/token';
 import { Login } from './../../../Models/login';
 import { SharedService } from './../../../Services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Client } from '../../../Models/client';
+import { Profil } from '../../../Models/profil';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,21 +17,22 @@ export class LoginComponent implements OnInit {
   public loginform : FormGroup;
   public signUpForm: FormGroup;
   public email : string ="";
-  public login!: Login;
   public hasAccount: boolean = true;
-  public client!: Client;
-  public clients!:Client[];
+  public client!: Profil;
+  public clients!:Profil[];
 
   ngOnInit(): void {
   }
 
   constructor( 
     private builder : FormBuilder,
-    private sharedServ: SharedService
+    private sharedServ: SharedService,
+    private profilServ: ProfilService,
+    private router: Router
      ) { 
     this.loginform = this.builder.group({
-      email : ['',Validators.required,Validators.email],
-      password : ['',Validators.required]
+      email : ['mnjaratiana@gmail.com',Validators.required],
+      password : ['123456',Validators.required]
     });
     this.signUpForm = this.builder.group({
       firstname : [''],
@@ -37,10 +42,10 @@ export class LoginComponent implements OnInit {
     })
   }
   
-  public getLoginValue() : void {
-    let email = this.loginform.get("username")?.value;
+  public getLoginValue() : Profil {
+    let email = this.loginform.get("email")?.value;
     let password = this.loginform.get("password")?.value;
-    this.login = new Login(email,password);
+    return new Profil("",PROFIL_TYPE.client,email,password);
   }
 
   public getSignUpValue() : void {
@@ -48,16 +53,19 @@ export class LoginComponent implements OnInit {
     let lastname = this.signUpForm.get("lastname")?.value;
     let email = this.signUpForm.get("email")?.value;
     let password = this.signUpForm.get("password")?.value;
-    this.client = new Client(firstname,lastname,email,password);
+    this.client = new Profil(firstname,lastname,email,password);
   }
 
-  public log(): void{
-    this.getLoginValue();
-    this.sharedServ.login(this.login)
-    .subscribe({
-      next: res => alert(JSON.stringify(res)),
-      error: err => alert(JSON.stringify(err))
-    });
+  public login(): void{
+    let login: Profil = this.getLoginValue();
+    this.sharedServ.login(login).subscribe(
+      (res: Response) =>{
+        console.log(res);
+        this.sharedServ.setUserLocal(res.data);
+        this.router.navigate(['/acceuil/restaurants']);
+      },
+      () => {alert("Une erreur s'est produit, veuillez vous reconnecter!")},
+    );
   }
 
 
@@ -68,13 +76,16 @@ export class LoginComponent implements OnInit {
 
   public findAllClient(): void{
     this.sharedServ.findAll().subscribe({
+      next: (res: Profil[]) => this.clients = res ,
       error: () => alert('Error on fetching data!'),
-      next: (res) => this.clients = res 
+    
     })
   }
 
   public changeOption(): void{
     this.hasAccount = !this.hasAccount;
   }
+
+  
 
 }

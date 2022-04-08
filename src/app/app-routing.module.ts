@@ -1,26 +1,36 @@
+import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Pages/Shared/login/login.component';
+import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
 
 const routes: Routes = [
   { 
-    path: 'ekaly/login', 
+    path: '', 
     component: LoginComponent
   },
   { 
-    path: 'ekaly/Accueil', 
+    path: 'acceuil',
     component: DefaultLayoutComponent,
     children:[
       {
-        path:"",
+        path:"restaurants/plats",
         component:MenuComponent
       },
       {
-        path:"Panier",
+        path:"restaurants/:id",
+        component:PlatsCrudComponent
+      },
+      {
+        path:"panier",
         component:PanierComponent
+      },
+      {
+        path:"restaurants",
+        component:RestaurantCrudComponent
       }
     ]
   },
