@@ -3,6 +3,9 @@ const fileHelper = require('../helpers/file.helper');
 
 async function insertRestaurant(restaurant, files){
   console.log(process.env.RESTO_IMG);
+  restaurant.type = "restaurant";
+  restaurant.status = true; 
+  console.log(restaurant);
   var fileData = fileHelper.uploadFile(files, process.env.RESTO_IMG);
   console.log(fileData);
   restaurant.avatar = fileData.data.path;
@@ -23,11 +26,21 @@ async function addPlates(restaurant, files){
   });
 }
 
+async function deleteRestaurant(restaurant){
+  console.log(restaurant);
+  profilService.getById(restaurant.id).then( resto => {
+    resto.status = false;
+    console.log(resto);
+    profilService.updateProfil(resto);
+  });
+}
+
 
 module.exports = {
   findRestaurants,
   addPlates,
-  insertRestaurant
+  insertRestaurant,
+  deleteRestaurant
 }
 
 

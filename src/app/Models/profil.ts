@@ -2,7 +2,7 @@ import { Plat } from './plat';
 
 export class Profil {
     public id: string;
-    public type: number | 0;
+    public type: string;
     public firstname?: string;
     public lastname?: string;
     public email: string;
@@ -11,10 +11,11 @@ export class Profil {
     public avatar?:string;
     public token!: string;
     public plats?: Array<Plat>;
+    public status!: boolean | true;
 
     constructor(
         id: string,
-        type: number,
+        type: string,
         email: string, 
         password: string,
         firstname?: string, 

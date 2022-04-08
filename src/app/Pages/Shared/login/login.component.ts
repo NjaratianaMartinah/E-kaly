@@ -1,9 +1,12 @@
+import { PROFIL_TYPE } from './../../../Models/shared';
+import { ProfilService } from './../../../Services/profil.service';
 import { Response } from './../../../Models/token';
 import { Login } from './../../../Models/login';
 import { SharedService } from './../../../Services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Profil } from '../../../Models/profil';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +26,9 @@ export class LoginComponent implements OnInit {
 
   constructor( 
     private builder : FormBuilder,
-    private sharedServ: SharedService
+    private sharedServ: SharedService,
+    private profilServ: ProfilService,
+    private router: Router
      ) { 
     this.loginform = this.builder.group({
       email : ['mnjaratiana@gmail.com',Validators.required],
@@ -37,10 +42,10 @@ export class LoginComponent implements OnInit {
     })
   }
   
-  public getLoginValue() : Login {
+  public getLoginValue() : Profil {
     let email = this.loginform.get("email")?.value;
     let password = this.loginform.get("password")?.value;
-    return new Login(email,password);
+    return new Profil("",PROFIL_TYPE.client,email,password);
   }
 
   public getSignUpValue() : void {
@@ -52,9 +57,13 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void{
-    let login: Login = this.getLoginValue();
+    let login: Profil = this.getLoginValue();
     this.sharedServ.login(login).subscribe(
-      (res: Response) =>{this.sharedServ.setToken(res.data?.token);},
+      (res: Response) =>{
+        console.log(res);
+        this.sharedServ.setUserLocal(res.data);
+        this.router.navigate(['/acceuil/restaurants']);
+      },
       () => {alert("Une erreur s'est produit, veuillez vous reconnecter!")},
     );
   }

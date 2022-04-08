@@ -8,8 +8,8 @@ import { LoginComponent } from './Pages/Shared/login/login.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
-import { RestaurantCrudComponent } from './Pages/Ekaly/restaurant-crud/restaurant-crud.component';
-import { AddComponent } from './Pages/Ekaly/restaurant-crud/add/add.component';
+import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
+import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { AddComponent } from './Pages/Ekaly/restaurant-crud/add/add.component';
     MenuComponent,
     PanierComponent,
     RestaurantCrudComponent,
-    AddComponent
+    PlatsCrudComponent
   ],
   imports: [
     BrowserModule,

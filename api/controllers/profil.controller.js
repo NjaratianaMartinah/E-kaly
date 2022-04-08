@@ -10,9 +10,15 @@ const profilController = (url , router) => {
      )
   } );
 
-  router.post( `${url}`, (req, res) => {
+  router.post( `${url}/register`, (req, res) => {
     profilService.register(req.body).then(
-      () => response.success(res, null, "Registration success")
+      () => response.success(res, null, "Registration succes")
+    ).catch( err => response.error(res, "Error during registration") );
+  })
+
+  router.get( `${url}/:id`, (req, res) => {
+    profilService.getById(req.params.id).then(
+      (restaurant) => response.success(res, restaurant, "Registration succes")
     ).catch( err => response.error(res, "Error during registration") );
   })
 

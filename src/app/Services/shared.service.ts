@@ -1,6 +1,6 @@
+import { PROFIL_TYPE } from './../Models/shared';
 import { Response } from './../Models/token';
 import { Profil } from '../Models/profil';
-import { Login } from './../Models/login';
 import { Injectable } from '@angular/core';
 import { Token } from '../Models/token';
 import { Observable } from 'rxjs';
@@ -17,8 +17,8 @@ export class SharedService {
     private http: HttpClient
     ) { }
 
-  public login(loginDto: Login): Observable<Response>{ 
-    return this.http.post<Response>(`${this.url}/user/login`, loginDto);
+  public login(clientDto: Profil): Observable<Response>{ 
+    return this.http.post<Response>(`${this.url}/user/login`, clientDto);
   } 
 
   public register(clientDto: Profil): Observable<Token>{ 
@@ -29,8 +29,11 @@ export class SharedService {
     return this.http.get<Profil[]>(`${this.url}/user/all`)
   }
 
-  public setToken(token: string): void{
-    localStorage.setItem("token",token);
+  public setUserLocal(profil: Profil){
+    localStorage.setItem("token",profil.token);
+    localStorage.setItem("profil", profil.email);
+    localStorage.setItem("type", profil.type);
+    localStorage.setItem("profil", profil.email);
   }
   
   public checkToken(): void{

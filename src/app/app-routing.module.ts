@@ -1,10 +1,11 @@
-import { RestaurantCrudComponent } from './Pages/Ekaly/restaurant-crud/restaurant-crud.component';
+import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Pages/Shared/login/login.component';
+import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
 
 const routes: Routes = [
   { 
@@ -12,12 +13,16 @@ const routes: Routes = [
     component: LoginComponent
   },
   { 
-    path: 'acceuil', 
+    path: 'acceuil',
     component: DefaultLayoutComponent,
     children:[
       {
-        path:"",
+        path:"restaurants/plats",
         component:MenuComponent
+      },
+      {
+        path:"restaurants/:id",
+        component:PlatsCrudComponent
       },
       {
         path:"panier",
