@@ -43,6 +43,7 @@ export class MenuComponent implements OnInit {
   }
 
   addToCart(plat: Plat){
+    plat.parentResto = this.restaurant.id;
     let order : Order = new Order(plat,1);
     this.cartServ.addToCart(order);
     console.log(JSON.parse(localStorage.getItem("cart") || "{}"));

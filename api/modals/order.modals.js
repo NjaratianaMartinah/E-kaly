@@ -38,7 +38,7 @@ const OrderSchema = new Schema({
   frais: {
     type: Number,
     required: true
-  }
+  },
   livreur: ProfilSchema
 });
 
