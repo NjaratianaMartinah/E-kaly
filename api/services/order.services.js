@@ -1,4 +1,5 @@
 const { Order, OrderSchema}  = require('../modals/order.modals');
+const profilService = require('./profil.services');
 
 async function saveOrder(orderParam){
   orderParam.status = 0;
@@ -14,6 +15,10 @@ async function getAllOrders(){
 
 async function findOrderOfRestaurant(resto){
   return await Order.find( {"plats.plat.sellprice": 10000} );
+}
+
+async function findDeliverer(){
+  return profilService.findAllByType("deliverer");
 }
 
 async function getById(orderId){
@@ -51,6 +56,7 @@ module.exports = {
   findOrderOfRestaurant,
   setDeliverer,
   updateStatusOrder,
+  findDeliverer,
   getOrderByDeliverer
 }
 

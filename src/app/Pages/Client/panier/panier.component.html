@@ -1,5 +1,5 @@
 <!-- CART PAGE ============================================= -->
-<section *ngIf="cart"  id="cart-1" class="wide-100 cart-page division">
+<section *ngIf="cartExist"  id="cart-1" class="wide-100 cart-page division">
 	<div class="container">
 		<!-- CART TABLE -->	
 		<div class="row">
@@ -18,7 +18,7 @@
 
 							<tbody>
 								<!-- CART ITEM #1 -->
-								<tr *ngFor="let order of cart.order; let i = index" >
+								<tr *ngFor="let order of cart.plats; let i = index" >
 									<td data-label="Product" class="product-name">
 										<!-- Preview -->
 										<div class="cart-product-img">
@@ -91,7 +91,7 @@
 	</div>	   <!-- End container --> 
 </section>	
 
-<h1 *ngIf="!cart">{{message}}</h1>
+<h1 *ngIf="!cartExist">{{message}}</h1>
 <!-- END CART PAGE -->	
 
   <!-- Modal confirm command-->

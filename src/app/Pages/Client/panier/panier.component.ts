@@ -14,6 +14,7 @@ export class PanierComponent implements OnInit {
   public cart!: Cart;
   public message: string ="";
   public totalWithFrais: number = 0;
+  public cartExist: boolean = true;
 
   constructor(
     private cartServ: CartService
@@ -25,10 +26,12 @@ export class PanierComponent implements OnInit {
 
   checkCart(){
     if(!this.cartServ.checkCart()){
+      this.cartExist = true;
       this.cart = this.cartServ.getCart();
       this.totalWithFrais = this.cartServ.setTotalWithFrais(this.cart);
       console.log(this.cart);
     }else{
+      this.cartExist = false;
       this.message = "Vous n'avez rien dans le panier!!!";
     }
   }
@@ -36,14 +39,14 @@ export class PanierComponent implements OnInit {
   setQuantity(event: any, index: number){
     console.log(event.target.value);
     let quantity: number = Number.parseInt(event.target.value);
-    this.cart.order[index] = this.cartServ.setQuantityOrder(this.cart.order[index],quantity);
+    this.cart.plats[index] = this.cartServ.setQuantityOrder(this.cart.plats[index],quantity);
     this.cartServ.setTotalPrice(this.cart);
     this.totalWithFrais = this.cartServ.setTotalWithFrais(this.cart);
     this.cartServ.setCart(this.cart);
   }
 
   removeToCart(indice: number){
-   this.cart.order.splice(indice,1);
+   this.cart.plats.splice(indice,1);
    this.cartServ.setTotalPrice(this.cart);
    this.totalWithFrais = this.cartServ.setTotalWithFrais(this.cart);
    this.cartServ.setCart(this.cart);
@@ -54,7 +57,8 @@ export class PanierComponent implements OnInit {
     this.cartServ.addCommand(this.cart).subscribe((res: Response) => {
         if(res.code === 202){
           this.message = "Votre commande a été validé";
-          localStorage.removeItem("cart");
+          this.cartExist = false;
+          this.cart = this.cartServ.getCart();
         }
       });
   }

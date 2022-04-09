@@ -23,6 +23,11 @@ const orderController = (url, router) => {
     )
   });
 
+  router.get(`${url}/deliverer`, (req, res) => {
+    orderService.findDeliverer().then( (deliverer) => response.success(res, deliverer, "Deliverer selected"))
+  });
+
+  
   router.post(`${url}/status`, (req, res) => {
     orderService.updateStatusOrder( req.body.orderId, req.body.status ).then(
       (order) => response.success(res, order, "change the status of the order")

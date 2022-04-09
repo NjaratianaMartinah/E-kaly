@@ -10,6 +10,7 @@ import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
 import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
 import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
+import { CommandesComponent } from './Pages/Ekaly/commandes/commandes.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.compone
     MenuComponent,
     PanierComponent,
     RestaurantCrudComponent,
-    PlatsCrudComponent
+    PlatsCrudComponent,
+    CommandesComponent
   ],
   imports: [
     BrowserModule,

@@ -32,10 +32,10 @@ export class CartService {
       cart = new Cart(profil,or); 
     }else{
       cart = this.getCart();
-      let index = cart.order.findIndex((element:Order) => element.plat._id === order.plat._id);
+      let index = cart.plats.findIndex((element:Order) => element.plat._id === order.plat._id);
       console.log(index);
       if(index === -1){
-        cart.order.push(order);
+        cart.plats.push(order);
       }
     }
     this.setTotalPrice(cart);
@@ -58,7 +58,7 @@ export class CartService {
   setTotalPrice(cart: Cart){
     cart.totalbuyprice = 0;
     cart.totalsellprice = 0;
-    cart.order.forEach(order => {
+    cart.plats.forEach(order => {
       cart.totalbuyprice = cart.totalbuyprice + order.totalbuyprice;
       cart.totalsellprice = cart.totalsellprice + order.totalsellprice;
     });
