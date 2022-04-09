@@ -8,20 +8,45 @@ const OrderItemSchema = new Schema({
   quantity: {
     type: Number,
     required: true
+  },
+  totalbuyprice: {
+    type: Number,
+    required: false
+  },
+  totalsellprice: {
+    type: Number,
+    required: false
   }
 });
 
 const OrderSchema = new Schema({
-  client : ProfilSchema,
-  restoPlat : {
-    resto: ProfilSchema,
-    plats: [ OrderItemSchema ]
+  id :{
+    type : String,
+    required: false
   },
-  totalPrice : {
+  client : ProfilSchema,
+  plats: [ OrderItemSchema ],
+  totalbuyprice : {
     type: Number,
     required: true
   },
-  date : Date
+  totalsellprice : {
+    type: Number,
+    required: true
+  },
+  date : Date,
+  status : {
+    type: Number,
+    required: true
+  },
+  frais: {
+    type: Number,
+    required: false
+  },
+  deliverer: {
+    type: ProfilSchema,
+    required: false
+  }
 });
 
 OrderSchema.set('toJSON', {

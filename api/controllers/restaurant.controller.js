@@ -10,8 +10,6 @@ const restaurantController = ( url ,router ) => {
 
   router.post(`${url}/addPlat`, (req, res) => {
     var restaurant = req.body;
-    console.log(restaurant);
-    console.log(req.files);
     var files = req.files;
     restaurant.plat = JSON.parse(restaurant.plat);
     restaurantService.addPlates(restaurant, files).then( (restaurant) => response.success(res, restaurant, "Add plat success")  );
@@ -21,20 +19,33 @@ const restaurantController = ( url ,router ) => {
     var data = req.body;
     console.log(data);
     var restaurant = JSON.parse( data.restaurant );
-    console.log(req.files);
     var files = req.files;
     restaurantService.insertRestaurant(restaurant, files).then(
       (restaurant) => response.success(res, null, "Restaurant added with success")
     );
   })
 
-  router.post(`${url}/delete`, (req, res)=> {
-    var resto = req.body;
-    console.log(resto);
-    restaurantService.deleteRestaurant(resto).then(
-      (resto) => response.success(res, null, "Restaurant deleted ")
-    );
-  });
+  router.post(`${url}/delete`, (req, res) => {
+    var restaurant = req.body;
+    console.log(restaurant);
+    restaurantService.deleteRestaurant(restaurant).then(
+       () => response.success(res, restaurant, "Restaurant deleted")
+    )
+  })
+
+  router.post(`${url}/delete/plat`, (req, res) => {
+    var restaurant = req.body;
+    console.log(restaurant);
+    restaurantService.deletePlat(restaurant).then(
+       () => response.success(res, restaurant, "Plat deleted")
+    )
+  })
+
+  router.get(`${url}/search`, (req, res) => {
+    restaurantService.findPlats().then(
+       (plats) => response.success(res, plats, "Plats selected")
+    )
+  })
 
 }
 

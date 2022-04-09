@@ -4,6 +4,10 @@ const plat = require("./plat.modals");
 
 
 const ProfilSchema = new Schema({
+    id :{
+      type : String,
+      required: false
+    },
     firstname: {
         type: String,
         required: false,
@@ -18,8 +22,7 @@ const ProfilSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     password: {
         type: String,
