@@ -20,6 +20,10 @@ const OrderItemSchema = new Schema({
 });
 
 const OrderSchema = new Schema({
+  id :{
+    type : String,
+    required: false
+  },
   client : ProfilSchema,
   plats: [ OrderItemSchema ],
   totalbuyprice : {
@@ -37,9 +41,12 @@ const OrderSchema = new Schema({
   },
   frais: {
     type: Number,
-    required: true
+    required: false
   },
-  livreur: ProfilSchema
+  deliverer: {
+    type: ProfilSchema,
+    required: false
+  }
 });
 
 OrderSchema.set('toJSON', {

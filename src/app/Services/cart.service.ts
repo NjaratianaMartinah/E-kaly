@@ -1,16 +1,22 @@
+import { Response } from './../Models/token';
+import { Observable } from 'rxjs';
 import { SharedService } from './shared.service';
 import { Cart } from './../Models/cart';
 import { Injectable } from '@angular/core';
 import { Order } from '../Models/order';
 import { Profil } from '../Models/profil';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private url: string = environment.url;
 
   constructor(
-  private sharedServ: SharedService
+  private sharedServ: SharedService,
+  private http: HttpClient
   ) { }
 
   checkCart(){
@@ -61,5 +67,10 @@ export class CartService {
   setTotalWithFrais(cart: Cart){
     return (cart.totalsellprice + cart.frais);
   }
+
+  public addCommand(cart: Cart): Observable<Response>{ 
+    return this.http.post<Response>(`${this.url}/orders`, cart);
+  } 
+
   
 }

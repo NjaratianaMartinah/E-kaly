@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const PlatSchema = new Schema({
+  id :{
+    type : String,
+    required: false
+  },
   designation:{
     type: String,
     required: true

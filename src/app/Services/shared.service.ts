@@ -29,6 +29,7 @@ export class SharedService {
   }
 
   public setUserLocal(profil: Profil){
+    profil.password="password";
     localStorage.setItem("profil",JSON.stringify(profil));
     localStorage.setItem("token",profil.token);
   }

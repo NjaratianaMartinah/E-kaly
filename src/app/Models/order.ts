@@ -1,6 +1,7 @@
 import { Plat } from './plat';
 
 export class Order {
+    public id!: string;
     public plat: Plat;
     public quantity!:number;
     public totalbuyprice!: number;

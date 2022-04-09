@@ -36,7 +36,7 @@
 										<input class="qty" (input)="setQuantity($event,i)" type="number" min="1" [value]="order.quantity">
 									</td>
 									<td data-label="Total" class="product-price-total"><h5 class="h5-md">{{order.totalsellprice}}</h5></td>
-									<td data-label="Delete" class="td-trash"><i class="far fa-trash-alt"></i></td>
+									<td data-label="Delete" class="td-trash" (click)="removeToCart(i)" ><i class="far fa-trash-alt"></i></td>
 
 								</tr>
 							</tbody>
@@ -50,40 +50,12 @@
 		<!-- CART CHECKOUT -->		
 		<div class="row">
 
-			<!-- DISCOUNT COUPON -->
-			<div class="col-lg-8">
-				<div class="discount-coupon row pt-15">
-
-					<!-- Form -->
-					<div class="col-md-8 col-lg-7">
-						<form class="discount-form">
-									
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Coupon Code" id="discount-code">								
-								<span class="input-group-btn">
-									<button type="submit" class="btn btn-salmon tra-salmon-hover">Apply Coupon</button>
-								</span>										
-							</div>
-										
-						</form>	
-					</div>
-
-
-					<!-- Button -->
-					<div class="col-md-4 col-lg-5 text-right">
-						<a onClick="window.location.reload()" class="btn btn-md btn-salmon tra-salmon-hover">Update Cart</a>
-					</div>
-
-				</div>
-			</div>
-
-
 			<!-- CHECKOUT -->
 			<div class="col-lg-4">
 				<div class="cart-checkout bg-lightgrey">
 
 					<!-- Title -->
-					<h5 class="h5-lg">Cart Total</h5>
+					<h5 class="h5-lg">Panier</h5>
 
 					<!-- Table -->
 					<table>
@@ -107,7 +79,7 @@
 					</table>
 
 					<!-- Button -->
-					<a href="#" class="btn btn-md btn-salmon tra-salmon-hover">Proceed To Checkout</a>
+					<button class="btn btn-md btn-salmon tra-salmon-hover" data-toggle="modal" data-target="#confirmModal">Valider ma commande</button>
 
 				</div>
 			</div>	<!-- END CHECKOUT -->
@@ -118,4 +90,31 @@
 
 	</div>	   <!-- End container --> 
 </section>	
+
+<h1 *ngIf="!cart">{{message}}</h1>
 <!-- END CART PAGE -->	
+
+  <!-- Modal confirm command-->
+  <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			Valider ma commande
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-md btn-red tra-red-hover" data-dismiss="modal">
+				<i class="fa fa-times"></i> Non
+			</button>
+			<button type="button" (click)="confirmCommand()"  data-dismiss="modal" class="btn btn-md btn-salmon tra-salmon-hover">
+				<i class="fa fa-check"></i> Oui
+			</button>
+		</div>
+	  </div>
+	</div>
+  </div>

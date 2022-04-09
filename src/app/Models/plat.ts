@@ -1,5 +1,6 @@
 export class Plat {
     public _id: string;
+    public id!: string;
     public designation: string;
     public sellprice: number;
     public buyprice: number;

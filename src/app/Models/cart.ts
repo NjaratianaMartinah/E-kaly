@@ -2,6 +2,7 @@ import { Order } from './order';
 import { Profil } from './profil'
 
 export class Cart {
+  public id!: string;
   public client : Profil;
   public order: Array<Order>;
   public totalbuyprice!: number;
