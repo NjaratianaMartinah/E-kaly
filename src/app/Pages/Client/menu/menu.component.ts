@@ -1,3 +1,5 @@
+import { Order } from './../../../Models/order';
+import { CartService } from './../../../Services/cart.service';
 import { environment } from 'src/environments/environment';
 import { Plat } from 'src/app/Models/plat';
 import { Response } from './../../../Models/token';
@@ -18,27 +20,32 @@ export class MenuComponent implements OnInit {
   uploadUrl: string = environment.upload;
 
   constructor(
-    private activRoute: ActivatedRoute,
-    private restoServ: RestaurantService
+    private activatedRoute: ActivatedRoute,
+    private restaurantServ: RestaurantService,
+    private cartServ: CartService
   ) { }
 
   ngOnInit(): void {
-    this.getPRestaurant();
+    this.getRestaurantPlates();
   }
 
-  getPRestaurant(){
-    this.restoServ.findRestaurantById(this.activRoute.snapshot.paramMap.get("id"))
+  getRestaurantPlates(){
+    this.restaurantServ.findRestaurantById(this.activatedRoute.snapshot.paramMap.get("id"))
       .subscribe((res: Response) =>{
         console.log(res);
           if(res.code === 202){
             this.restaurant = res.data;
             this.plats = this.restaurant.plats;
-            this.plats?.forEach(plat => {
-              plat.avatar = this.uploadUrl.concat("/"+plat.avatar);
-            });
+            console.log(this.restaurant);
           }
         }
        );
+  }
+
+  addToCart(plat: Plat){
+    let order : Order = new Order(plat,1);
+    this.cartServ.addToCart(order);
+    console.log(JSON.parse(localStorage.getItem("cart") || "{}"));
   }
 
 }

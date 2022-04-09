@@ -26,6 +26,10 @@ const PlatSchema = new Schema({
     type: Boolean,
     required: true,
     default: true
+  },
+  parentResto:{
+    type: String,
+    required: false
   }
 });
 

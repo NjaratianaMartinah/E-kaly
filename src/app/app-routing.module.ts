@@ -17,13 +17,13 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children:[
       {
-        path:"restaurants/plats",
+        path:"restaurants/:id",
         component:MenuComponent
       },
-      {
-        path:"restaurants/:id",
-        component:PlatsCrudComponent
-      },
+      // {
+      //   path:"restaurants/:id",
+      //   component:PlatsCrudComponent
+      // },
       {
         path:"panier",
         component:PanierComponent

@@ -1,6 +1,5 @@
-import { PROFIL_TYPE } from './../Models/shared';
+import { Profil } from 'src/app/Models/profil';
 import { Response } from './../Models/token';
-import { Profil } from '../Models/profil';
 import { Injectable } from '@angular/core';
 import { Token } from '../Models/token';
 import { Observable } from 'rxjs';
@@ -30,14 +29,18 @@ export class SharedService {
   }
 
   public setUserLocal(profil: Profil){
+    localStorage.setItem("profil",JSON.stringify(profil));
     localStorage.setItem("token",profil.token);
-    localStorage.setItem("profil", profil.email);
-    localStorage.setItem("type", profil.type);
-    localStorage.setItem("profil", profil.email);
+  }
+
+  public getUserLocal(){
+    let profil: string = localStorage.getItem("profil")  || '{}';
+    let user  = JSON.parse(profil);
+    return user;
   }
   
-  public checkToken(): void{
-    localStorage.getItem("token");
+  public checkToken(): string| null{
+    return localStorage.getItem("token");
   }
   
 }

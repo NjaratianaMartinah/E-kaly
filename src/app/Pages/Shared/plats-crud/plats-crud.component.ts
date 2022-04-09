@@ -18,15 +18,14 @@ export class PlatsCrudComponent implements OnInit {
 
   
   public apiUrl: string = environment.upload;
-  public message!: string ;
   public platesForm! : FormGroup;
   public indice!: number;
   public restaurant!: Profil;
-  public plat: Plat =  new Plat("Burger",100,200,"Burger Burger","Burger");
+  public plat: Plat =  new Plat("","Burger",100,200,"Burger Burger","Burger");
   public formData: FormData = new FormData() ;
   public action: boolean = true; //true pour l'ajout, false pour la modif
   public plates: Array<Plat> | undefined = [
-    new Plat("Burger",100,200,"Burger Burger","Burger"),
+    new Plat("","Burger",100,200,"Burger Burger","Burger"),
   ] 
 
   ngOnInit(): void {
@@ -35,9 +34,7 @@ export class PlatsCrudComponent implements OnInit {
 
   constructor( 
     private builder : FormBuilder,
-    private profilServ: ProfilService,
     private restaurantServ: RestaurantService,
-    private router : Router,
     private activatedRoute : ActivatedRoute
      ) {
       this.setForm();
@@ -54,7 +51,7 @@ export class PlatsCrudComponent implements OnInit {
   }
 
   public initForm(): void{
-    this.plat =  new Plat("Burger",100,200,"Burger Burger",""),
+    this.plat =  new Plat("","Burger",100,200,"Burger Burger",""),
     this.action = true;
     this.setForm();
   }
