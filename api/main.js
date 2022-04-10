@@ -17,6 +17,7 @@ async function main(){
   profilController('/api/user', app);
   restaurantController('/api/restaurants',app);
   orderController('/api/orders', app);
+  delivererController('/api/deliverers', app);
 }
 
 module.exports = {main, app};

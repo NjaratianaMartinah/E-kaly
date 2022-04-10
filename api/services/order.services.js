@@ -14,11 +14,7 @@ async function getAllOrders(){
 }
 
 async function findOrderOfRestaurant(resto){
-  return await Order.find( {"plats.plat.sellprice": 10000} );
-}
-
-async function findDeliverer(){
-  return profilService.findAllByType("deliverer");
+  return await Order.find( {"plats.plat.parentResto": resto.id},{} );
 }
 
 async function getById(orderId){

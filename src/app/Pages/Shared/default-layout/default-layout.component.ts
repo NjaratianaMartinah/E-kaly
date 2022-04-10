@@ -1,3 +1,4 @@
+import { Globale } from './../../../Models/global';
 import { ProfilService } from 'src/app/Services/profil.service';
 import { SharedService } from './../../../Services/shared.service';
 import { Profil } from 'src/app/Models/profil';
@@ -18,6 +19,7 @@ export class DefaultLayoutComponent implements OnInit {
   public isRestaurant!: boolean;
   public isEkaly!: boolean;
   public isDeliverer!: boolean;
+  public countAricle: number = new Globale().countAricle;
 
   constructor(
     private sharedServ: SharedService,
@@ -41,5 +43,6 @@ export class DefaultLayoutComponent implements OnInit {
     this.sharedServ.clearLocalStorage();
     this.route.navigate([""]);
   }
+
 
 }

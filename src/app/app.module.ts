@@ -1,5 +1,6 @@
+import { Globale } from './Models/global';
 import { MaterialModule } from './material/material.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +35,9 @@ import { DragDropComponent } from './Pages/Livreur/drag-drop/drag-drop.component
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    Globale
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
