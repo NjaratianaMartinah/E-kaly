@@ -1,53 +1,103 @@
-<!-- HEADER-1 ============================================= -->
-		<header id="header-1" class="header navik-header header-shadow center-menu-1 header-transparent">
-			<div class="container">
-				<!-- NAVIGATION MENU -->
-				<div class="navik-header-container">
-					<!-- CALL BUTTON -->
-				    <div class="callusbtn"><a href="tel:123456789"><i class="fas fa-phone"></i></a></div>
-					<!-- LOGO IMAGE -->
-	                <div class="logo" data-mobile-logo="./assets/images/logo-02.png" data-sticky-logo="./assets/images/logo-02.png">
-	                	<a href="#hero-5"><img src="./assets/images/logo-02.png" alt="header-logo"/></a>
-					</div>
-					<!-- BURGER MENU -->
-					<div class="burger-menu">
-						<div class="line-menu line-half first-line"></div>
-						<div class="line-menu"></div>
-						<div class="line-menu line-half last-line"></div>
-					</div>
-					<!-- MAIN MENU -->
-	                <nav *ngIf="isClient"  class="navik-menu menu-caret navik-yellow">
-	                	<ul class="top-list">
-	                		<!-- DROPDOWN MENU -->
-	                		<li><a [routerLink]="['/acceuil/restaurants']">Restaurants</a>
-	                		</li>
-						</ul>
-						<ul>
-							<!-- BASKET ICON -->
-							<li class="basket-ico ico-30">
-					        	<a [routerLink]="['/acceuil/panier']">
-					        		<span class="ico-holder"><span class="flaticon-shopping-bag"></span> <em class="roundpoint">2</em></span>
-					        	</a>
-					        </li>
-                            <li class="basket-ico ico-30">
-					        	<a href="cart.html">
-					        		<span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
-					        	</a>
-					        </li>
-	                    </ul>
-                    </nav>	
-                    <!-- END MAIN MENU -->
+    <!-- HEADER-1 ============================================= -->
+    <header id="header-1" class="header navik-header header-shadow center-menu-1 header-transparent">
+        <div class="container">
+            <!-- NAVIGATION MENU -->
+            <div class="navik-header-container">
+                <!-- CALL BUTTON -->
+                <div class="callusbtn"><a href="tel:123456789"><i class="fas fa-phone"></i></a></div>
+                <!-- LOGO IMAGE -->
+                <div class="logo" data-mobile-logo="./assets/images/logo-02.png" data-sticky-logo="./assets/images/logo-02.png">
+                    <a href="#hero-5"><img src="./assets/images/logo-02.png" alt="header-logo"/></a>
+                </div>
+                <!-- BURGER MENU -->
+                <div class="burger-menu">
+                    <div class="line-menu line-half first-line"></div>
+                    <div class="line-menu"></div>
+                    <div class="line-menu line-half last-line"></div>
+                </div>
+                <!-- MAIN MENU  Client-->
+                <nav *ngIf="isClient"  class="navik-menu menu-caret navik-yellow">
+                    <ul class="top-list">
+                        <!-- DROPDOWN MENU -->
+                        <li><a [routerLink]="['/acceuil/restaurants']">Restaurants</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <!-- BASKET ICON -->
+                        <li class="basket-ico ico-30">
+                            <a [routerLink]="['/acceuil/panier']">
+                                <span class="ico-holder"><span class="flaticon-shopping-bag"></span> <em class="roundpoint">2</em></span>
+                            </a>
+                        </li>
+                        <li class="basket-ico ico-30">
+                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
+                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>	
+                <!-- END MAIN MENU -->
 
+                <!-- MAIN MENU Restaurants-->
+                <nav *ngIf="isRestaurant" class="navik-menu menu-caret navik-yellow">
+                    <ul class="top-list">
+                        <!-- DROPDOWN MENU -->
+                        <li><a href="#">Commandes</a> </li>
+                    </ul>
+                    <ul>
+                        <!-- DROPDOWN MENU -->
+                        <li><a href="#">Menu</a></li>
 
-				</div>	<!-- END NAVIGATION MENU -->
+                        <li class="basket-ico ico-30">
+                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
+                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>	
+                <!-- END MAIN MENU -->
 
-
-			</div>     <!-- End container -->
-		</header>	
-		<!-- END HEADER-1 -->
-    
-    <!-- PAGE CONTENT
-    ============================================= -->	
+                <!-- MAIN MENU Ekaly-->
+                <nav *ngIf="isEkaly"class="navik-menu menu-caret navik-yellow">
+                    <ul class="top-list">
+                        <!-- DROPDOWN MENU -->
+                        <li><a [routerLink]="['/acceuil/commandes']">Commandes</a></li>
+                    </ul>
+                    <ul>
+                        <!-- DROPDOWN MENU -->
+                        <li><a href="#">Paramètres</a>
+                            <ul>
+                                <li><a [routerLink]="['/acceuil/restaurants']">Restaurants</a></li>
+                                <li><a [routerLink]="['/acceuil/panier']">Livreur</a></li>
+                            </ul>
+                        </li>
+                        <li class="basket-ico ico-30">
+                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
+                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>	
+                <!-- END MAIN MENU -->
+                <!-- MAIN MENU Ekaly-->
+                <nav *ngIf="isDeliverer"class="navik-menu menu-caret navik-yellow">
+                    <ul class="top-list">
+                        <!-- DROPDOWN MENU -->
+                        <li><a></a></li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
+                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>	
+                <!-- END MAIN MENU -->
+            </div>	<!-- END NAVIGATION MENU -->
+        </div>     <!-- End container -->
+    </header> <!-- END HEADER-1 -->
+    <!-- PAGE CONTENT ============================================= -->	
     <div id="page" class="page">
 
      <!-- HERO-5
@@ -185,5 +235,6 @@
 
 
 
-    </div>	<!-- END PAGE CONTENT -->
+    </div>	
+    <!-- END PAGE CONTENT -->
   

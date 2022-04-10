@@ -43,5 +43,9 @@ export class SharedService {
   public checkToken(): string| null{
     return localStorage.getItem("token");
   }
+
+  public clearLocalStorage(){
+    localStorage.clear();
+  }
   
 }
