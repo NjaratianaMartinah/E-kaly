@@ -5,11 +5,11 @@ const restaurantController = require('./controllers/restaurant.controller');
 const orderController = require('./controllers/order.controller');
 
 
-const uri = "mongodb://localhost:27017/ekaly";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log(`Connected to mongo at ${uri}`));
+// const uri = "mongodb://localhost:27017/ekaly";
+// mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', () => console.log(`Connected to mongo at ${uri}`));
 
 
 async function main(){
