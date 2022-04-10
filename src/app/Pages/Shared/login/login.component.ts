@@ -20,8 +20,10 @@ export class LoginComponent implements OnInit {
   public hasAccount: boolean = true;
   public client!: Profil;
   public clients!:Profil[];
+  public user!: Profil;
 
   ngOnInit(): void {
+    this.getLocalUser()
   }
 
   constructor( 
@@ -40,6 +42,10 @@ export class LoginComponent implements OnInit {
       email : ['',Validators.required,Validators.email],
       password : ['',Validators.required]
     })
+  }
+
+  getLocalUser(){
+    this.user = this.sharedServ.getUserLocal();
   }
   
   public getLoginValue() : Profil {
@@ -62,7 +68,8 @@ export class LoginComponent implements OnInit {
         if(res.code === 202){
           console.log(res);
           this.sharedServ.setUserLocal(res.data);
-          this.router.navigate(['/acceuil/restaurants']);
+          if(this.profilServ.isClient(this.user.type)){this.router.navigate(['/acceuil/restaurants'])}
+          if(this.profilServ.isEkaly(this.user.type)){ this.router.navigate(['/acceuil/commandes']);}
         }
       },
       () => {alert("Une erreur s'est produit, veuillez vous reconnecter!")},
