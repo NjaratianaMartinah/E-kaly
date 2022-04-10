@@ -1,6 +1,6 @@
+import { PROFIL_TYPE } from 'src/app/Models/shared';
 import { SharedService } from './../../../Services/shared.service';
 import { environment } from 'src/environments/environment';
-import { PROFIL_TYPE } from './../../../Models/shared';
 import { RestaurantService } from './../../../Services/restaurant.service';
 import { Response } from './../../../Models/token';
 import { ProfilService } from './../../../Services/profil.service';
@@ -84,9 +84,8 @@ export class RestaurantCrudComponent implements OnInit {
 
   public addRestaurant(): void{
     let profil: Profil = this.getFormValue();
+    profil.type = PROFIL_TYPE.restaurant;
     this.formData.set("restaurant",JSON.stringify(profil));
-    console.log(this.formData.get("restaurant"));
-    console.log(this.formData.get("avatar"));
     if(this.action){
         this.profilServ.createProfil(this.formData).subscribe((res: Response) =>console.log(res));
     }else{

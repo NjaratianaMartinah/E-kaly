@@ -16,7 +16,7 @@ export class DelivererService {
     ) { }
 
     public findDeliverers(): Observable<Response>{
-      return this.http.get<Response>(`${this.url}/orders/deliverer`);
+      return this.http.get<Response>(`${this.url}/deliverers`);
     }
 
 }
