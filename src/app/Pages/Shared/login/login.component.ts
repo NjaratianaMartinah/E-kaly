@@ -58,11 +58,12 @@ export class LoginComponent implements OnInit {
 
   public login(): void{
     let login: Profil = this.getLoginValue();
-    this.sharedServ.login(login).subscribe(
-      (res: Response) =>{
-        console.log(res);
-        this.sharedServ.setUserLocal(res.data);
-        this.router.navigate(['/acceuil/restaurants']);
+    this.sharedServ.login(login).subscribe((res: Response) =>{
+        if(res.code === 202){
+          console.log(res);
+          this.sharedServ.setUserLocal(res.data);
+          this.router.navigate(['/acceuil/restaurants']);
+        }
       },
       () => {alert("Une erreur s'est produit, veuillez vous reconnecter!")},
     );

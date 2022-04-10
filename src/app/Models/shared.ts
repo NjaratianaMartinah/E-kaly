@@ -1,6 +1,6 @@
 export const PROFIL_TYPE = {
     client : "client",
     restaurant : "restaurant",
-    livreur : "livreur",
+    livreur : "deliverer",
     ekaly : "ekaly",
 }

@@ -1,3 +1,4 @@
+import { DragDropComponent } from './Pages/Livreur/drag-drop/drag-drop.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path:"commandes",
         component:CommandesComponent
+      },
+      {
+        path:"drag",
+        component:DragDropComponent
       }
     ]
   },

@@ -1,3 +1,4 @@
+import { SharedService } from './../../../Services/shared.service';
 import { environment } from 'src/environments/environment';
 import { PROFIL_TYPE } from './../../../Models/shared';
 import { RestaurantService } from './../../../Services/restaurant.service';
@@ -22,23 +23,30 @@ export class RestaurantCrudComponent implements OnInit {
   public restaurant: Profil = new Profil("",PROFIL_TYPE.restaurant,"pho@gmail.com","123456","Pho","Pho","12343","");
   public formData: FormData = new FormData() ;
   public action: boolean = true; //true pour l'ajout, false pour la modif
-  public restos: Array<Profil> = [
-    new Profil("1",PROFIL_TYPE.restaurant,"resto1@gmail.com","123456","Smokey House Burger","Smokey House Burger","20131","burger-08.png"),
-    new Profil("2",PROFIL_TYPE.restaurant,"resto1@gmail.com","123456","Resto1","Resto1","20131","burger-08.png")
-  ]
-
-  ngOnInit(): void {
-    this.findRestaurants();
-  }
+  public restos: Array<Profil> =[];
+  public isClient: boolean = false;
+  public isEkaly: boolean = false;
+  public user!: Profil;
 
   constructor( 
     private builder : FormBuilder,
     private profilServ: ProfilService,
     private restaurantServ: RestaurantService,
-    private router : Router
+    private router : Router,
+    private sharedServ: SharedService
      ) {
       this.setForm();
      }
+
+  ngOnInit(): void {
+    this.findRestaurants();
+  }
+
+  getLocalUser(){
+    this.user = this.sharedServ.getUserLocal();
+    this.isClient = this.profilServ.isClient(this.user.type);
+    this.isEkaly = this.profilServ.isEkaly(this.user.type);
+  }
 
   public setForm(): void{
     this.restaurantForm = this.builder.group({
