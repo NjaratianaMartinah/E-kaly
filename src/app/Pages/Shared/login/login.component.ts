@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   public hasAccount: boolean = true;
   public client!: Profil;
   public clients!:Profil[];
+  public user!: Profil;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   constructor( 
     private builder : FormBuilder,
@@ -40,6 +40,10 @@ export class LoginComponent implements OnInit {
       email : ['',Validators.required,Validators.email],
       password : ['',Validators.required]
     })
+  }
+
+  getLocalUser(){
+    this.user = this.sharedServ.getUserLocal();
   }
   
   public getLoginValue() : Profil {
@@ -60,9 +64,11 @@ export class LoginComponent implements OnInit {
     let login: Profil = this.getLoginValue();
     this.sharedServ.login(login).subscribe((res: Response) =>{
         if(res.code === 202){
-          console.log(res);
-          this.sharedServ.setUserLocal(res.data);
-          this.router.navigate(['/acceuil/restaurants']);
+          this.user = res.data;
+          this.sharedServ.setUserLocal(this.user);
+          if(this.profilServ.isClient(this.user.type)){this.router.navigate(['/acceuil/restaurants']);}
+          if(this.profilServ.isEkaly(this.user.type)){ this.router.navigate(['/acceuil/commandes']);}
+          if(this.profilServ.isDeliverer(this.user.type)){ this.router.navigate(['/acceuil/drag']);}
         }
       },
       () => {alert("Une erreur s'est produit, veuillez vous reconnecter!")},

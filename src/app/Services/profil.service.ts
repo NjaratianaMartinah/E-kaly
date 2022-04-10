@@ -37,12 +37,15 @@ export class ProfilService {
     return type === PROFIL_TYPE.restaurant;
   }
 
-  public isLivreur(type : string){
-    return type === PROFIL_TYPE.livreur;
+  public isDeliverer(type : string){
+    return type === PROFIL_TYPE.deliverer;
   }
 
   public isEkaly(type : string){
+    console.log(type);
+    console.log("profil ekaly:" + PROFIL_TYPE.ekaly);
     return type === PROFIL_TYPE.ekaly;
   }
 
 }
+  

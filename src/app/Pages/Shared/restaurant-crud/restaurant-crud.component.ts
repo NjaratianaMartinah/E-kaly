@@ -24,8 +24,8 @@ export class RestaurantCrudComponent implements OnInit {
   public formData: FormData = new FormData() ;
   public action: boolean = true; //true pour l'ajout, false pour la modif
   public restos: Array<Profil> =[];
-  public isClient: boolean = false;
-  public isEkaly: boolean = false;
+  public isClient!: boolean;
+  public isEkaly!: boolean;
   public user!: Profil;
 
   constructor( 
@@ -68,8 +68,11 @@ export class RestaurantCrudComponent implements OnInit {
     this.restaurantServ.findRestaurants().subscribe((res : Response) =>{ 
       this.restos = res.data
       this.restos.forEach(resto => {
-      resto.avatar = this.apiUrl.concat("/"+resto.avatar);
+         resto.avatar = this.apiUrl.concat("/"+resto.avatar);
       });
+      this.getLocalUser();
+      console.log(this.isClient);
+      console.log(this.isEkaly);
       console.log(this.restos);
    });
   }
