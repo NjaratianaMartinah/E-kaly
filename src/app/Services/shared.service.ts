@@ -1,5 +1,5 @@
-import { Client } from './../Models/client';
-import { Login } from './../Models/login';
+import { Profil } from 'src/app/Models/profil';
+import { Response } from './../Models/token';
 import { Injectable } from '@angular/core';
 import { Token } from '../Models/token';
 import { Observable } from 'rxjs';
@@ -12,19 +12,40 @@ import { HttpClient } from '@angular/common/http';
 export class SharedService {
   private url: string = environment.url
   
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+    ) { }
 
-  public login(loginDto: Login): Observable<Token>{ 
-    return this.http.post<Token>(`${this.url}/user/login`, loginDto) 
+  public login(clientDto: Profil): Observable<Response>{ 
+    return this.http.post<Response>(`${this.url}/user/login`, clientDto);
   } 
 
-  // public signUp(loginDto: Client): Observable<Token>{ 
-  //   return this.http.post<Token>(`${this.url}/client/login`, loginDto) 
-  // } 
+  public register(clientDto: Profil): Observable<Token>{ 
+    return this.http.post(`${this.url}/user/register`, clientDto);
+  } 
 
+  public findAll(): Observable<Profil[]>{
+    return this.http.get<Profil[]>(`${this.url}/user/all`)
+  }
 
-  public findAll(): Observable<Client[]>{
-    return this.http.get<Client[]>(`${this.url}/user/all`)
+  public setUserLocal(profil: Profil){
+    profil.password="password";
+    localStorage.setItem("profil",JSON.stringify(profil));
+    localStorage.setItem("token",profil.token);
+  }
+
+  public getUserLocal(){
+    let profil: string = localStorage.getItem("profil")  || '{}';
+    let user  = JSON.parse(profil);
+    return user;
+  }
+  
+  public checkToken(): string| null{
+    return localStorage.getItem("token");
+  }
+
+  public clearLocalStorage(){
+    localStorage.clear();
   }
   
 }

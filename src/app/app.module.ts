@@ -1,4 +1,6 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Globale } from './Models/global';
+import { MaterialModule } from './material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,6 +10,10 @@ import { LoginComponent } from './Pages/Shared/login/login.component';
 import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-layout.component';
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
+import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
+import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
+import { CommandesComponent } from './Pages/Ekaly/commandes/commandes.component';
+import { DragDropComponent } from './Pages/Livreur/drag-drop/drag-drop.component';
 
 @NgModule({
   declarations: [
@@ -15,16 +21,23 @@ import { PanierComponent } from './Pages/Client/panier/panier.component';
     LoginComponent,
     DefaultLayoutComponent,
     MenuComponent,
-    PanierComponent
+    PanierComponent,
+    RestaurantCrudComponent,
+    PlatsCrudComponent,
+    CommandesComponent,
+    DragDropComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
-  providers: [],
+  providers: [
+    Globale
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

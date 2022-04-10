@@ -1,0 +1,34 @@
+<section id="menu-6" class="wide-70 menu-section division">
+    <div class="container">
+        <div class="example-container">
+            <h2>To do</h2>
+          
+            <div
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="commands"
+              [cdkDropListConnectedTo]="[doneList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of commands" cdkDrag>{{item.client.firstname}}</div>
+            </div>
+        </div>
+          
+        <div class="example-container">
+        <h2>Done</h2>
+        
+        <div
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="commands"
+            [cdkDropListConnectedTo]="[todoList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of commands" cdkDrag>{{item.client.firstname}}</div>
+        </div>
+        </div>
+    </div>
+</section>
+    
+
+
