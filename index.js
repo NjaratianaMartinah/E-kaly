@@ -1,4 +1,4 @@
-const {main , app} = require('./api/main');
+const {main , app} = require('api/main');
 const path= require('path');
 
 
