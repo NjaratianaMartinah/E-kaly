@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node index.js",
+    "start": "npx nodemon index.js",
     "node:dev": "nodemon -r dotenv/config . dotenv_config_path=./.env",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "install:clean":"rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "heroku-postbuild": "npx ng build"
   },
   "private": true,
@@ -45,6 +45,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "nodemon": "^2.0.15",
     "typescript": "~4.6.2"
   }
 }
