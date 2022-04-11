@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const profilController = require('./controllers/profil.controller');
 const restaurantController = require('./controllers/restaurant.controller');
 const orderController = require('./controllers/order.controller');
+const delivererController = require('./controllers/deliverer.controller');
 
-
-// const uri = "mongodb://localhost:27017/ekaly";
+const uri = process.env.MONGO_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
