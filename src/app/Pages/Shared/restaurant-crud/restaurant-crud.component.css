@@ -1,0 +1,5 @@
+.cart-product-img img {
+    height: 100px !important;
+    width: 100px !important;
+    max-width: inherit;
+}

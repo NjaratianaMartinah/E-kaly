@@ -14,6 +14,7 @@ import { Profil } from 'src/app/Models/profil';
 export class DragDropComponent implements OnInit {
 
   public commands: Array<Cart> = [];
+  public commandsDone: Array<Cart> = [];
   public user!: Profil;
 
   constructor(
@@ -30,17 +31,18 @@ export class DragDropComponent implements OnInit {
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   drop(event: CdkDragDrop<Cart[]>) {
-    console.log(this.done);
-    console.log(this.todo);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+      const cart = event.previousContainer.data.splice(event.previousIndex, 1);
+      // event.container.data.splice(event.currentIndex,0, cart[0]);
     }
   }
 
@@ -50,6 +52,7 @@ export class DragDropComponent implements OnInit {
       console.log(res);
       if(res.code === 202){
         this.commands = res.data;
+        this.commandsDone = res.data;
       }
     });
   }

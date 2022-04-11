@@ -29,7 +29,7 @@ const orderController = (url, router) => {
     )
   });
 
-  router.get(`${url}/deliverer`, (req, res) => {
+  router.get(`${url}/deliverer/:delivererId`, (req, res) => {
     const param = req.body;
     orderService.getOrderByDeliverer(param.delivererId).then( (orders) => response.success(res, orders, "Orders selected"))
   });

@@ -1,12 +1,12 @@
 import { PROFIL_TYPE } from './../../../Models/shared';
 import { ProfilService } from './../../../Services/profil.service';
 import { Response } from './../../../Models/token';
-import { Login } from './../../../Models/login';
 import { SharedService } from './../../../Services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Profil } from '../../../Models/profil';
 import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     let lastname = this.signUpForm.get("lastname")?.value;
     let email = this.signUpForm.get("email")?.value;
     let password = this.signUpForm.get("password")?.value;
-    this.client = new Profil(firstname,lastname,email,password);
+    this.client = new Profil("",PROFIL_TYPE.client,email,password,firstname,lastname);
   }
 
   public login(): void{
@@ -69,23 +69,26 @@ export class LoginComponent implements OnInit {
           if(this.profilServ.isClient(this.user.type)){this.router.navigate(['/acceuil/restaurants']);}
           if(this.profilServ.isEkaly(this.user.type)){ this.router.navigate(['/acceuil/commandes']);}
           if(this.profilServ.isDeliverer(this.user.type)){ this.router.navigate(['/acceuil/drag']);}
+        }else{
+          alert(res.message);
         }
       },
-      () => {alert("Une erreur s'est produit, veuillez vous reconnecter!")},
     );
   }
 
-
   public signUp(): void{
     this.getSignUpValue();
-    // console.log(this.sharedServ.signUp(this.client));
+    this.sharedServ.register(this.client) .subscribe((res: Response) =>{
+      if(res.code === 202){
+        location.reload();
+      }
+   });
   }
 
   public findAllClient(): void{
     this.sharedServ.findAll().subscribe({
       next: (res: Profil[]) => this.clients = res ,
       error: () => alert('Error on fetching data!'),
-    
     })
   }
 

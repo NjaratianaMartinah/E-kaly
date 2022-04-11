@@ -20,8 +20,8 @@ export class SharedService {
     return this.http.post<Response>(`${this.url}/user/login`, clientDto);
   } 
 
-  public register(clientDto: Profil): Observable<Token>{ 
-    return this.http.post(`${this.url}/user/register`, clientDto);
+  public register(clientDto: Profil): Observable<Response>{ 
+    return this.http.post<Response>(`${this.url}/user/register`, clientDto);
   } 
 
   public findAll(): Observable<Profil[]>{
