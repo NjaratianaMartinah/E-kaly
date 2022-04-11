@@ -52,7 +52,6 @@ module.exports = {
   findOrderOfRestaurant,
   setDeliverer,
   updateStatusOrder,
-  findDeliverer,
   getOrderByDeliverer
 }
 
