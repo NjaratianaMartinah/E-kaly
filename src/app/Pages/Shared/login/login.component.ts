@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Profil } from '../../../Models/profil';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
     private router: Router
      ) { 
     this.loginform = this.builder.group({
-      email : ['mnjaratiana@gmail.com',Validators.required],
+      email : ['ekaly@gmail.com',Validators.required],
       password : ['123456',Validators.required]
     });
     this.signUpForm = this.builder.group({
@@ -95,7 +94,5 @@ export class LoginComponent implements OnInit {
   public changeOption(): void{
     this.hasAccount = !this.hasAccount;
   }
-
-  
 
 }
