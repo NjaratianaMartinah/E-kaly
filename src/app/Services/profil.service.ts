@@ -1,3 +1,4 @@
+import { DataService } from './data.service';
 import { Response } from './../Models/token';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -14,19 +15,19 @@ export class ProfilService {
   private url: string = environment.url
   
   constructor(
-    private http: HttpClient
+    private dataServ: DataService
     ) { }
 
   public createProfil(profil: FormData): Observable<Response>{ 
-    return this.http.post<Response>(`${this.url}/restaurants`, profil);
+    return this.dataServ.postData(`${this.url}/restaurants`, profil);
   } 
 
   public editProfil(profil: FormData): Observable<Response>{ 
-    return this.http.put<Response>(`${this.url}/user/edit`, profil);
+    return this.dataServ.postData(`${this.url}/user/edit`, profil);
   } 
 
   public deleteProfil(profil: Profil): Observable<Response>{ 
-    return this.http.delete<Response>(`${this.url}/user/delete/${profil.id}`);
+    return this.dataServ.postData(`${this.url}/user/delete`,profil);
   } 
 
   public isClient(type : string){

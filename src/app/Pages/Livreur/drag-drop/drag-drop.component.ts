@@ -13,11 +13,24 @@ import { Profil } from 'src/app/Models/profil';
 })
 export class DragDropComponent implements OnInit {
 
-  public commands: Array<Cart> = [];
-  public commandsDone: Array<Cart> = [];
+  public commands!:Array<Cart>;
+  public commandsDone!:Array<Cart>;
+  public commandsDelivery!:Array<Cart>;
   public user!: Profil;
 
-  constructor(
+  public order:Array<any> = [
+    {"id":1, "nom":"Njaratiana"},
+    {"id":1, "nom":"Martinah"},
+    {"id":1, "nom":"Rahalinjanahary"},
+  ];
+
+  public orderDone:Array<any> = [
+    {"id":1, "nom":"Tahiana"},
+    {"id":1, "nom":"Martinah"},
+    {"id":1, "nom":"Rakotondramanana"},
+  ];
+
+    constructor(
     private commandeServ: CommandService,
     private sharedServ: SharedService  
   ) { }
@@ -34,25 +47,23 @@ export class DragDropComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
-      const cart = event.previousContainer.data.splice(event.previousIndex, 1);
-      // event.container.data.splice(event.currentIndex,0, cart[0]);
     }
   }
 
   getDelivererCommands(){
     this.user = this.sharedServ.getUserLocal();
     this.commandeServ.findDelivererCommands(this.user.id).subscribe((res: Response) => {
-      console.log(res);
       if(res.code === 202){
-        this.commands = res.data;
-        this.commandsDone = res.data;
+        let str = JSON.stringify(res.data);
+        this.commands = JSON.parse(str);
+        this.commandsDone = JSON.parse(str);
+        this.commandsDelivery = JSON.parse(str);
       }
     });
   }

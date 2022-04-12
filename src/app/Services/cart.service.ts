@@ -1,3 +1,4 @@
+import { DataService } from './data.service';
 import { Response } from './../Models/token';
 import { Observable } from 'rxjs';
 import { SharedService } from './shared.service';
@@ -16,7 +17,7 @@ export class CartService {
 
   constructor(
   private sharedServ: SharedService,
-  private http: HttpClient
+  private dataServ: DataService
   ) { }
 
   checkCart(){
@@ -69,7 +70,7 @@ export class CartService {
   }
 
   public addCommand(cart: Cart): Observable<Response>{ 
-    return this.http.post<Response>(`${this.url}/orders`, cart);
+    return this.dataServ.postData(`${this.url}/orders`, cart);
   } 
 
   

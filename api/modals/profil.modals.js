@@ -39,8 +39,7 @@ const ProfilSchema = new Schema({
     },
     status:{
       type: Boolean,
-      required: true,
-      default: true
+      required: true
     }
 },  { shardkey :{ email : 1} });
 

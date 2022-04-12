@@ -35,8 +35,8 @@ async function addPlates(restaurant, files){
 
 async function deleteRestaurant(restaurant){
   profilService.getById(restaurant.id).then( resto => {
-    resto.state = Number.parseInt( process.env.DISABLED );
     console.log(resto);
+    resto.status = false;
     profilService.updateProfil(resto);
   })
 }

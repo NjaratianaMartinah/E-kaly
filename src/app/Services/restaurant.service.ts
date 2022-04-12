@@ -1,3 +1,4 @@
+import { DataService } from './data.service';
 import { Response } from './../Models/token';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -11,22 +12,22 @@ import { environment } from 'src/environments/environment';
 export class RestaurantService {
   private url: string = environment.url
 
-  constructor(private http: HttpClient) { }
+  constructor(private dataServ: DataService) { }
   
   public findRestaurants(): Observable<Response>{
-    return this.http.get<Response>(`${this.url}/restaurants`)
+    return this.dataServ.getData(`${this.url}/restaurants`)
   }
 
   public findRestaurantById(restaurant: any): Observable<Response>{
-    return this.http.get<Response>(this.url.concat("/user/"+restaurant))
+    return this.dataServ.getData(this.url.concat("/user/"+restaurant))
   }
 
   public addPlat(platData: FormData): Observable<Response>{ 
-    return this.http.post<Response>(`${this.url}/restaurants/addPlat`, platData);
+    return this.dataServ.postData(`${this.url}/restaurants/addPlat`, platData);
   } 
 
   public deleteRestaurant(restaurant: Profil): Observable<Response>{
-    return this.http.post<Response>(`${this.url}/restaurants/delete`, restaurant);
+    return this.dataServ.postData(`${this.url}/restaurants/delete`, restaurant);
   }
 
 }

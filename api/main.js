@@ -6,6 +6,7 @@ const orderController = require('./controllers/order.controller');
 const delivererController = require('./controllers/deliverer.controller');
 
 const uri = process.env.MONGO_URI;
+console.log(uri);
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

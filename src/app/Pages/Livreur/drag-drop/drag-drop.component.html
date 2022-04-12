@@ -10,22 +10,46 @@
               [cdkDropListConnectedTo]="[doneList]"
               class="example-list"
               (cdkDropListDropped)="drop($event)">
-              <div class="example-box" *ngFor="let item of commands" cdkDrag>{{item.client.firstname}}</div>
+              <div class="example-box" *ngFor="let item of commands" cdkDrag>
+                  <h6>{{item.client.firstname}} </h6>
+                  <small>{{item.date}}</small>
+                  <small>{{item.totalsellprice}}</small>
+             </div>
             </div>
         </div>
           
         <div class="example-container">
-        <h2>Done</h2>
-        
-        <div
-            cdkDropList
-            #doneList="cdkDropList"
-            [cdkDropListData]="commandsDone"
-            [cdkDropListConnectedTo]="[todoList]"
-            class="example-list"
-            (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let item of commandsDone" cdkDrag>{{item.client.firstname}}</div>
+            <h2>Done</h2>
+            <div
+                cdkDropList
+                #doneList="cdkDropList"
+                [cdkDropListData]="commandsDone"
+                [cdkDropListConnectedTo]="[deliveryList]"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of commandsDone" cdkDrag>
+                    <h6>{{item.client.firstname}} </h6>
+                    <small>{{item.date}}</small>
+                    <small>{{item.totalsellprice}}</small>
+                </div>
+            </div>
         </div>
+
+        <div class="example-container">
+            <h2>Deliver</h2>
+            <div
+                cdkDropList
+                #deliveryList="cdkDropList"
+                [cdkDropListData]="commandsDelivery"
+                [cdkDropListConnectedTo]="[todoList]"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of commandsDelivery" cdkDrag>
+                    <h6>{{item.client.firstname}} </h6>
+                    <small>{{item.date}}</small>
+                    <small>{{item.totalsellprice}}</small>
+                </div>
+            </div>
         </div>
     </div>
 </section>

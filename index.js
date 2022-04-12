@@ -12,5 +12,16 @@ app.get('/ekaly/', (req, res) =>{
   res.sendFile(path.join(__dirname, 'dist/ekaly-fo/index.html'))
 });
 
-main();
 
+app.get('/assets/', (req, res) =>{
+  console.log("Ok ok");
+  res.sendFile(path.join(__dirname, 'dist/assets/*'))
+});
+
+app.get('/assets/*', (req, res) =>{
+  console.log("Ok ok");
+  res.sendFile(path.join(__dirname, 'dist/assets/*'))
+});
+
+
+main();

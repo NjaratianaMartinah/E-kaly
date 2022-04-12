@@ -1,7 +1,7 @@
+import { DataService } from './data.service';
 import { Profil } from 'src/app/Models/profil';
 import { Response } from './../Models/token';
 import { Injectable } from '@angular/core';
-import { Token } from '../Models/token';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -24,10 +24,6 @@ export class SharedService {
     return this.http.post<Response>(`${this.url}/user/register`, clientDto);
   } 
 
-  public findAll(): Observable<Profil[]>{
-    return this.http.get<Profil[]>(`${this.url}/user/all`)
-  }
-
   public setUserLocal(profil: Profil){
     profil.password="password";
     localStorage.setItem("profil",JSON.stringify(profil));
@@ -40,7 +36,7 @@ export class SharedService {
     return user;
   }
   
-  public checkToken(): string| null{
+  public getToken(): string| null{
     return localStorage.getItem("token");
   }
 

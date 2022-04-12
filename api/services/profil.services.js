@@ -19,6 +19,8 @@ async function register(params){
   params.state = 1;
   const profil = new Profil(params)
   await profil.save();
+  profil.password = password;
+  return login(profil);
 }
 
 async function getById(id) {
@@ -30,7 +32,7 @@ async function updateProfil(profil){
 }
 
 async function findAllByType(types){
-  var param = { type: types, state: Number.parseInt( process.env.ENABLED ) };
+  var param = { type: types, status: process.env.ENABLED};
   return await Profil.find(param);
 }
 

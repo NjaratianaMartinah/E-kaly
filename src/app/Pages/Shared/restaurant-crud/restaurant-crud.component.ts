@@ -51,7 +51,7 @@ export class RestaurantCrudComponent implements OnInit {
   public setForm(): void{
     this.restaurantForm = this.builder.group({
       firstname : [this.restaurant.firstname,Validators.required],
-      phonenumber : [this.restaurant.phonenumber,Validators.required],
+      phonenumber : [this.restaurant.phonenumber],
       email : [this.restaurant.email,Validators.required],
       password : [this.restaurant.password,Validators.required],
       avatar:[this.restaurant.avatar,Validators.required]
@@ -71,9 +71,6 @@ export class RestaurantCrudComponent implements OnInit {
          resto.avatar = this.apiUrl.concat("/"+resto.avatar);
       });
       this.getLocalUser();
-      console.log(this.isClient);
-      console.log(this.isEkaly);
-      console.log(this.restos);
    });
   }
 
@@ -85,9 +82,16 @@ export class RestaurantCrudComponent implements OnInit {
   public addRestaurant(): void{
     let profil: Profil = this.getFormValue();
     profil.type = PROFIL_TYPE.restaurant;
+    profil.status = true;
     this.formData.set("restaurant",JSON.stringify(profil));
+    console.log(this.action);
     if(this.action){
-        this.profilServ.createProfil(this.formData).subscribe((res: Response) =>console.log(res));
+        this.profilServ.createProfil(this.formData).subscribe((res: Response) =>{
+          console.log(res.data);
+          let newResto = res.data;
+          newResto.avatar = this.apiUrl.concat("/"+newResto.avatar);
+          this.restos.push(newResto);
+        });
     }else{
       this.profilServ.editProfil(this.formData).subscribe((res: Response) => console.log(res));
     }
@@ -111,11 +115,10 @@ export class RestaurantCrudComponent implements OnInit {
 
   public deleteRestaurant(){
     console.log(this.restaurant);
-    this.restaurantServ.deleteRestaurant(this.restaurant)
-      .subscribe((res: Response) => {
+    this.restaurantServ.deleteRestaurant(this.restaurant).subscribe((res: Response) => {
         console.log(res);
         if(res.code === 202){
-          let ind = this.restos.findIndex((resto) => this.restaurant.id = resto.id);
+          let ind = this.restos.findIndex((resto) => resto.id === this.restaurant.id);
           this.restos.splice(ind);
         }
         this.message = res.message;

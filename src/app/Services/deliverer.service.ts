@@ -1,3 +1,4 @@
+import { DataService } from './data.service';
 import { Response } from './../Models/token';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -12,11 +13,11 @@ export class DelivererService {
   private url: string = environment.url
   
   constructor(
-    private http: HttpClient
+    private dataServ: DataService
     ) { }
 
     public findDeliverers(): Observable<Response>{
-      return this.http.get<Response>(`${this.url}/deliverers`);
+      return this.dataServ.getData(`${this.url}/deliverers`);
     }
 
 }

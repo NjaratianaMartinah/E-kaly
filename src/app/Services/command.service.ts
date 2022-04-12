@@ -1,3 +1,4 @@
+import { DataService } from './data.service';
 import { Response } from './../Models/token';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -13,19 +14,19 @@ export class CommandService {
   private url: string = environment.url
   
   constructor(
-    private http: HttpClient
+    private dataServ: DataService
     ) { }
 
     public findEkalyCommands(): Observable<Response>{
-      return this.http.get<Response>(`${this.url}/orders`);
+      return this.dataServ.getData(`${this.url}/orders`);
     }
 
     public AssignCommandDeliverer(request: any): Observable<Response>{
-      return this.http.post<Response>(`${this.url}/orders/deliverer`,request);
+      return this.dataServ.postData(`${this.url}/orders/deliverer`,request);
     }
 
     public findDelivererCommands(profil: any): Observable<Response>{
-        return this.http.get<Response>(this.url.concat("/orders/deliverer/"+profil));
+        return this.dataServ.getData(this.url.concat("/orders/deliverer/"+profil));
     }
 
 }
