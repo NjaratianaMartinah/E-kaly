@@ -30,9 +30,7 @@
                             </a>
                         </li>
                         <li class="basket-ico ico-30">
-                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
-                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
-                            </button>
+                            <a (click)="logout()">Déconnexion</a>
                         </li>
                     </ul>
                 </nav>	
@@ -46,12 +44,10 @@
                     </ul>
                     <ul>
                         <!-- DROPDOWN MENU -->
-                        <li><a href="#">Menu</a></li>
+                        <li><a [routerLink]="['/acceuil/plats']">Menu</a></li>
 
                         <li class="basket-ico ico-30">
-                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
-                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
-                            </button>
+                            <a  (click)="logout()">Déconnexion</a>
                         </li>
                     </ul>
                 </nav>	
@@ -64,17 +60,9 @@
                         <li><a [routerLink]="['/acceuil/commandes']">Commandes</a></li>
                     </ul>
                     <ul>
-                        <!-- DROPDOWN MENU -->
-                        <li><a href="#">Paramètres</a>
-                            <ul>
-                                <li><a [routerLink]="['/acceuil/restaurants']">Restaurants</a></li>
-                                <li><a [routerLink]="['/acceuil/panier']">Livreur</a></li>
-                            </ul>
-                        </li>
+                        <li><a [routerLink]="['/acceuil/restaurants']">Restaurants</a></li>
                         <li class="basket-ico ico-30">
-                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
-                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
-                            </button>
+                            <a  (click)="logout()">Déconnexion</a>
                         </li>
                     </ul>
                 </nav>	
@@ -86,10 +74,8 @@
                         <li><a></a></li>
                     </ul>
                     <ul>
-                        <li>
-                            <button (click)="logout()" class="btn btn-salmon tra-salmon-hover" >
-                                <span class="ico-holder"><i class="fa fa-logout"></i>Déconnexion</span>
-                            </button>
+                        <li class="basket-ico ico-30">
+                            <a  (click)="logout()">Déconnexion</a>
                         </li>
                     </ul>
                 </nav>	
@@ -100,38 +86,21 @@
     <!-- PAGE CONTENT ============================================= -->	
     <div id="page" class="page">
 
-     <!-- HERO-5
-        ============================================= -->	
-        <section id="hero-5" class="hero-section">
-            <div class="bg-fixed bg-inner division">
-
-
-                <!-- HERO TEXT -->
-                <div class="container">							
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="hero-5-txt text-center white-color">
-
-                                <!-- Title -->	
-                                <h2>Pizza</h2>
-
-                                <!-- Image -->
-                                <div class="hero-5-img">
-                                    <img class="img-fluid" src="./assets/images/hero-5-img.png" alt="hero-image">
-                                </div>
-
-                            </div>  
-                        </div>	 
-                    </div>	 <!-- End row -->
-                </div>	 <!-- END HERO TEXT -->
-
-
-                <!-- SECTION OVERLAY -->	
-                <div class="bg-fixed white-overlay-wave"></div>
-
-
-            </div>	   <!-- End Inner Content -->
-        </section>	<!-- END HERO-5 -->	
+     	<!-- PAGE HERO
+			============================================= -->	
+			<div id="about-page" class="page-hero-section division">
+				<div class="container">	
+					<div class="row">	
+						<div class="col-lg-10 offset-lg-1">
+							<div class="hero-txt text-center white-color">
+								<!-- Title -->
+								<h2 class="h2-xl">E-kaly</h2>
+							</div>
+						</div>	
+					</div>	  <!-- End row -->
+				</div>	   <!-- End container --> 
+			</div>	
+			<!-- END PAGE HERO -->
 
 
     <router-outlet></router-outlet>

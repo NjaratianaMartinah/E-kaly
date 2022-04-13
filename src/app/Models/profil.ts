@@ -10,7 +10,7 @@ export class Profil {
     public phonenumber?: string;
     public avatar?:string;
     public token!: string;
-    public plats?: Array<Plat>;
+    public plats!: Array<Plat>;
     public status!: boolean | true;
 
     constructor(

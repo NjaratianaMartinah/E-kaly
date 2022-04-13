@@ -36,11 +36,11 @@ export class CommandListComponent implements OnInit {
   findRestoCommand(): void{
     this.commandeServ.findRestoCommands(this.user.id).subscribe((res: Response) => {
         if(res.code === 202){
-          this.commands = res.data;
+          this.commands = res.data.filter((order: any) => order.plats.plat.parentResto === this.user.id);
+          this.commands.forEach(cart => {
+            this.cartServ.setTotalPrice(cart);
+          });
         }
-        this.commands.forEach(cart => {
-          this.cartServ.setTotalPrice(cart);
-        });
       });
     }
 

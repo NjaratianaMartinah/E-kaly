@@ -30,4 +30,11 @@ export class RestaurantService {
     return this.dataServ.postData(`${this.url}/restaurants/delete`, restaurant);
   }
 
+  
+  public deletePlat(restaurant: Profil): Observable<Response>{
+    return this.dataServ.postData(`${this.url}/restaurants/delete/plat`, restaurant);
+  }
+
+
+
 }

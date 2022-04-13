@@ -54,7 +54,6 @@
 								<th scope="col">Plat</th>
                                 <th scope="col">prix d'achat</th>
                                 <th scope="col">prix</th>
-								<th scope="col">Modifier</th>
 								<th scope="col">Supprimer</th>
 							</tr>
 							</thead>
@@ -74,7 +73,6 @@
 								</td>
                                 <td data-label="Numero" class="product-qty">{{plat.buyprice}}</td>
                                 <td data-label="Numero" class="product-qty">{{plat.sellprice}}</td>
-								<td data-label="Modifier" class="td-trash"><i class="fa fa-pen" (click)="setModalStatus(plat)" data-toggle="modal" data-target="#exampleModal"></i></td>
 								<td data-label="Supprimer" class="td-trash"><i class="far fa-trash-alt" (click)="confirmDelete(plat)"  data-toggle="modal" data-target="#deleteModal"></i></td>
 							</tr>
 						</tbody>

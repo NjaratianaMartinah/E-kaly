@@ -20,10 +20,7 @@ export class PlatsCrudComponent implements OnInit {
   public restaurant!: Profil;
   public plat: Plat =  new Plat("","Burger",100,200,"Burger Burger","Burger");
   public formData: FormData = new FormData() ;
-  public action: boolean = true; //true pour l'ajout, false pour la modif
-  public plates: Array<Plat> | undefined = [
-    new Plat("","Burger",100,200,"Burger Burger","Burger"),
-  ] 
+  public plates: Array<Plat> =[];
 
   ngOnInit(): void {
     this.getRestaurantPlates();
@@ -39,7 +36,11 @@ export class PlatsCrudComponent implements OnInit {
 
   getRestaurantPlates(): void{
     this.restaurant  = this.sharedServ.getUserLocal();
+    this.restaurant?.plats?.forEach(plat => {
+        plat.avatar = this.apiUrl.concat("/"+plat.avatar);
+    });
     this.plates = this.restaurant.plats;
+
   }
   
 
@@ -55,7 +56,6 @@ export class PlatsCrudComponent implements OnInit {
 
   public initForm(): void{
     this.plat =  new Plat("","Burger",100,200,"Burger Burger",""),
-    this.action = true;
     this.setForm();
   }
 
@@ -69,11 +69,15 @@ export class PlatsCrudComponent implements OnInit {
     this.formData.set("id",this.restaurant.id);
     this.formData.set("plat",JSON.stringify(plat));
     console.log(this.formData.get("restaurant"));
-    if(this.action){
-        this.restaurantServ.addPlat(this.formData).subscribe((res: Response) =>console.log(res));
-    }else{
-      // this.restaurantServ.editPlat(this.formData).subscribe((res: Response) => console.log(res));
-    }
+    this.restaurantServ.addPlat(this.formData).subscribe((res: Response) =>{
+      if(res.code === 202){
+        let newPlat = res.data;
+        newPlat.avatar = this.apiUrl.concat("/"+newPlat.avatar);
+        this.plates?.push(newPlat);
+        this.restaurant.plats = this.plates;
+        localStorage.setItem("profil",JSON.stringify(this.restaurant));
+      }
+    });
   }
 
   public selectFile(event: any){
@@ -85,28 +89,15 @@ export class PlatsCrudComponent implements OnInit {
     this.plat = plat;
   }
 
-  setModalStatus(plat: Plat){
-    this.action = false;
-    this.plat = plat
-    this.setForm();
+
+  public deletePlat(){
+    this.restaurantServ.deletePlat(this.restaurant).subscribe((res: Response) => {
+        console.log(res);
+        if(res.code === 202){
+          let ind : number = this.plates?.findIndex((plat) => plat.id = this.plat.id);
+          this.plates?.splice(ind);
+        }
+      });
   }
-
-
-  // public deletePlat(){
-  //   this.restaurantServ.deletePlat(this.restaurant)
-  //     .subscribe((res: Response) => {
-  //       console.log(res);
-  //       if(res.code === 202){
-  //         let ind = this.restos.findIndex((resto) => this.restaurant.id = resto.id);
-  //         this.restos.splice(ind);
-  //       }
-  //       this.message = res.message;
-  //     });
-  // }
-
-  // checkPlates(resto: any){
-  //   this.router.navigate(["acceuil/restaurants",resto.id]);
-  // }
-
 
 }

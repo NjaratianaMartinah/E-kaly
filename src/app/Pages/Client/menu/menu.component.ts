@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
   restaurant!: Profil;
   plats: Array<Plat> | undefined= [];
   uploadUrl: string = environment.upload;
+  public apiUrl: string = environment.upload;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,11 +32,13 @@ export class MenuComponent implements OnInit {
   }
 
   getRestaurantPlates(){
-    this.restaurantServ.findRestaurantById(this.activatedRoute.snapshot.paramMap.get("id"))
-      .subscribe((res: Response) =>{
+    this.restaurantServ.findRestaurantById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe((res: Response) =>{
         console.log(res);
           if(res.code === 202){
             this.restaurant = res.data;
+            this.restaurant?.plats?.forEach(plat => {
+              plat.avatar = this.apiUrl.concat("/"+plat.avatar);
+             });
             this.plats = this.restaurant.plats;
             console.log(this.restaurant);
           }
