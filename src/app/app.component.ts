@@ -11,7 +11,6 @@ export class AppComponent implements OnInit{
   public footer:string = "Njaratiana Martinah";
 
   ngOnInit(): void {
-    console.log("App start");
   }
 
 }

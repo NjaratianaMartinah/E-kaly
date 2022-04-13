@@ -31,7 +31,6 @@ export class CommandesComponent implements OnInit {
     this.commandeServ.findEkalyCommands().subscribe((res: Response) => {
         if(res.code === 202){
           this.commands = res.data;
-          console.log(this.commands);
         }
       });
   }
@@ -40,7 +39,6 @@ export class CommandesComponent implements OnInit {
     this.delivererServ.findDeliverers().subscribe((res: Response) =>{
       if(res.code === 202){
         this.deliverers = res.data;
-        console.log(this.deliverers);
       }
     });
     
@@ -48,9 +46,7 @@ export class CommandesComponent implements OnInit {
 
   changeDeliverer(event: any){
     let ind = event.target.value;
-    console.log(ind);
     this.deliverer = this.deliverers[ind];
-    console.log(this.deliverer);
   }
 
   assignCommand(){

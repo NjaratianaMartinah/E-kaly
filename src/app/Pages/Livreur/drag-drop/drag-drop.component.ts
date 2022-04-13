@@ -42,7 +42,6 @@ export class DragDropComponent implements OnInit {
     this.user = this.sharedServ.getUserLocal();
     this.commandeServ.findDelivererCommands(this.user.id).subscribe((res: Response) => {
       if(res.code === 202){
-        console.log(res.data);
         let str = JSON.stringify(res.data);
         const ordersTemp = JSON.parse(str);
         this.orders  = ordersTemp.filter((order: any) => order.status === ORDER);
@@ -53,25 +52,20 @@ export class DragDropComponent implements OnInit {
   }
 
   setStatus(containerId: string, data: any, index: number){
-    console.log(data);
     if(containerId === "delivering") this.setDelivering(index, data);
     if(containerId === "delivered") this.setDelivered(index, data);
   }
 
   setDelivering(index: number,data: any){
     let status = {orderId: data[index].id, status: DELIVERING};
-    console.log(status);
     this.commandeServ.updateOrderStatus(status).subscribe((res: Response) => {
-      console.log(res);
     });
     data[index].status = DELIVERING;
   }
 
   setDelivered(index: number,data: any){
     let status = {orderId: data[index].id, status: DELIVERED};
-    console.log(status);
     this.commandeServ.updateOrderStatus(status).subscribe((res: Response) => {
-      console.log(res);
     });
     data[index].status = DELIVERED;
   }

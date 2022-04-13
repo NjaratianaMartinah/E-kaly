@@ -33,14 +33,12 @@ export class MenuComponent implements OnInit {
 
   getRestaurantPlates(){
     this.restaurantServ.findRestaurantById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe((res: Response) =>{
-        console.log(res);
           if(res.code === 202){
             this.restaurant = res.data;
             this.restaurant?.plats?.forEach(plat => {
               plat.avatar = this.apiUrl.concat("/"+plat.avatar);
              });
             this.plats = this.restaurant.plats;
-            console.log(this.restaurant);
           }
         }
        );

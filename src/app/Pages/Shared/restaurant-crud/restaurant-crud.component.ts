@@ -75,7 +75,6 @@ export class RestaurantCrudComponent implements OnInit {
   }
 
   public getFormValue(){
-    console.log(this.restaurantForm.value);
     return this.restaurantForm.value;
   }
 
@@ -84,10 +83,8 @@ export class RestaurantCrudComponent implements OnInit {
     profil.type = PROFIL_TYPE.restaurant;
     profil.status = true;
     this.formData.set("restaurant",JSON.stringify(profil));
-    console.log(this.action);
     if(this.action){
         this.profilServ.createProfil(this.formData).subscribe((res: Response) =>{
-          console.log(res.data);
           let newResto = res.data;
           newResto.avatar = this.apiUrl.concat("/"+newResto.avatar);
           this.restos.push(newResto);
@@ -114,9 +111,7 @@ export class RestaurantCrudComponent implements OnInit {
 
 
   public deleteRestaurant(){
-    console.log(this.restaurant);
     this.restaurantServ.deleteRestaurant(this.restaurant).subscribe((res: Response) => {
-        console.log(res);
         if(res.code === 202){
           let ind = this.restos.findIndex((resto) => resto.id === this.restaurant.id);
           this.restos.splice(ind);

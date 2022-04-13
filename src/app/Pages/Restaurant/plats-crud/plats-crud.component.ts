@@ -60,7 +60,6 @@ export class PlatsCrudComponent implements OnInit {
   }
 
   public getFormValue(){
-    console.log(this.platesForm.value);
     return this.platesForm.value;
   }
 
@@ -68,7 +67,6 @@ export class PlatsCrudComponent implements OnInit {
     let plat: Plat = this.getFormValue();
     this.formData.set("id",this.restaurant.id);
     this.formData.set("plat",JSON.stringify(plat));
-    console.log(this.formData.get("restaurant"));
     this.restaurantServ.addPlat(this.formData).subscribe((res: Response) =>{
       if(res.code === 202){
         let newPlat = res.data;
@@ -92,7 +90,6 @@ export class PlatsCrudComponent implements OnInit {
 
   public deletePlat(){
     this.restaurantServ.deletePlat(this.restaurant).subscribe((res: Response) => {
-        console.log(res);
         if(res.code === 202){
           let ind : number = this.plates?.findIndex((plat) => plat.id = this.plat.id);
           this.plates?.splice(ind);

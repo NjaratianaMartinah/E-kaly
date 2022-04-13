@@ -43,8 +43,6 @@ export class ProfilService {
   }
 
   public isEkaly(type : string){
-    console.log(type);
-    console.log("profil ekaly:" + PROFIL_TYPE.ekaly);
     return type === PROFIL_TYPE.ekaly;
   }
 
