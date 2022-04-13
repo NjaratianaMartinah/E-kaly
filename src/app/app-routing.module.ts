@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Pages/Shared/login/login.component';
 import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
 import { CommandesComponent } from './Pages/Ekaly/commandes/commandes.component';
+import { PlatsCrudComponent } from './Pages/Restaurant/plats-crud/plats-crud.component';
 
 const routes: Routes = [
   { 
@@ -22,10 +23,10 @@ const routes: Routes = [
         path:"restaurants/:id",
         component:MenuComponent
       },
-      // {
-      //   path:"restaurants/:id",
-      //   component:PlatsCrudComponent
-      // },
+      {
+        path:"plats",
+        component:PlatsCrudComponent
+      },
       {
         path:"panier",
         component:PanierComponent
@@ -43,7 +44,7 @@ const routes: Routes = [
         component:DragDropComponent
       },
       {
-        path:"restaurants/orders",
+        path:"orders",
         component:CommandListComponent
       }
     ]

@@ -15,7 +15,7 @@ async function getAllOrders(){
 
 async function findOrderOfRestaurant(resto){
   console.log(resto);
-  return await Order.find( {"plats.plat.parentResto": resto},{} );
+  return await Order.find({"plats.plat.parentResto": resto});
 }
 
 async function getById(orderId){

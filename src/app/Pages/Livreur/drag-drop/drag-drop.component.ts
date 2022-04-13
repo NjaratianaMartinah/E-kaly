@@ -1,3 +1,4 @@
+import { DELIVERING, DELIVERED, ORDER } from './../../../Models/shared';
 import { Response } from './../../../Models/token';
 import { SharedService } from './../../../Services/shared.service';
 import { CommandService } from './../../../Services/command.service';
@@ -13,22 +14,11 @@ import { Profil } from 'src/app/Models/profil';
 })
 export class DragDropComponent implements OnInit {
 
-  public commands!:Array<Cart>;
-  public commandsDone!:Array<Cart>;
-  public commandsDelivery!:Array<Cart>;
+  public orders!:Array<Cart>;
+  public ordersDelivering!:Array<Cart>;
+  public ordersDelivered!:Array<Cart>;
+
   public user!: Profil;
-
-  public order:Array<any> = [
-    {"id":1, "nom":"Njaratiana"},
-    {"id":1, "nom":"Martinah"},
-    {"id":1, "nom":"Rahalinjanahary"},
-  ];
-
-  public orderDone:Array<any> = [
-    {"id":1, "nom":"Tahiana"},
-    {"id":1, "nom":"Martinah"},
-    {"id":1, "nom":"Rakotondramanana"},
-  ];
 
     constructor(
     private commandeServ: CommandService,
@@ -39,20 +29,12 @@ export class DragDropComponent implements OnInit {
     this.getDelivererCommands();
   }
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-
   drop(event: CdkDragDrop<Cart[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      transferArrayItem(event.previousContainer.data,event.container.data,event.previousIndex,event.currentIndex);
+       this.setStatus(event.container.id, event.container.data, event.currentIndex);
     }
   }
 
@@ -60,12 +42,38 @@ export class DragDropComponent implements OnInit {
     this.user = this.sharedServ.getUserLocal();
     this.commandeServ.findDelivererCommands(this.user.id).subscribe((res: Response) => {
       if(res.code === 202){
+        console.log(res.data);
         let str = JSON.stringify(res.data);
-        this.commands = JSON.parse(str);
-        this.commandsDone = JSON.parse(str);
-        this.commandsDelivery = JSON.parse(str);
+        const ordersTemp = JSON.parse(str);
+        this.orders  = ordersTemp.filter((order: any) => order.status === ORDER);
+        this.ordersDelivering  = ordersTemp.filter((order: any) => order.status === DELIVERING);
+        this.ordersDelivered  = ordersTemp.filter((order: any) => order.status === DELIVERED);
       }
     });
+  }
+
+  setStatus(containerId: string, data: any, index: number){
+    console.log(data);
+    if(containerId === "delivering") this.setDelivering(index, data);
+    if(containerId === "delivered") this.setDelivered(index, data);
+  }
+
+  setDelivering(index: number,data: any){
+    let status = {orderId: data[index].id, status: DELIVERING};
+    console.log(status);
+    this.commandeServ.updateOrderStatus(status).subscribe((res: Response) => {
+      console.log(res);
+    });
+    data[index].status = DELIVERING;
+  }
+
+  setDelivered(index: number,data: any){
+    let status = {orderId: data[index].id, status: DELIVERED};
+    console.log(status);
+    this.commandeServ.updateOrderStatus(status).subscribe((res: Response) => {
+      console.log(res);
+    });
+    data[index].status = DELIVERED;
   }
 
 }

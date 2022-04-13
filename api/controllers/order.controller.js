@@ -13,8 +13,7 @@ const orderController = (url, router) => {
   });
 
   router.get(`${url}/restaurant/:restoId`, (req, res) => {
-    const param = req.param;
-    console.log("parametre: "+param.restoId);
+    const param = req.params;
     orderService.findOrderOfRestaurant(param.restoId).then( (orders) => response.success(res, orders, "Orders selected"))
   });
 
@@ -26,13 +25,14 @@ const orderController = (url, router) => {
   });
   
   router.post(`${url}/status`, (req, res) => {
+    console.log(req.body);
     orderService.updateStatusOrder( req.body.orderId, req.body.status ).then(
       (order) => response.success(res, order, "change the status of the order")
     )
   });
 
   router.get(`${url}/deliverer/:delivererId`, (req, res) => {
-    const param = req.body;
+    const param = req.params;
     orderService.getOrderByDeliverer(param.delivererId).then( (orders) => response.success(res, orders, "Orders selected"))
   });
 }

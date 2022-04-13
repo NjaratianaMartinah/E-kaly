@@ -68,12 +68,8 @@
                                         <td>{{cart.totalsellprice}}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="col" colspan="3">Frais</th>
-                                        <td>{{cart.frais}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col" colspan="3">Total</th>
-                                        <td>{{cart.totalsellprice + cart.frais}}</td>
+                                        <th scope="col" colspan="3">Bénéfice</th>
+                                        <td>{{cart.totalsellprice - cart.totalbuyprice}}</td>
                                     </tr>
                                 </tbody>
     

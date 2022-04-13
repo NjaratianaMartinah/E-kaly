@@ -11,7 +11,7 @@ import { DefaultLayoutComponent } from './Pages/Shared/default-layout/default-la
 import { MenuComponent } from './Pages/Client/menu/menu.component';
 import { PanierComponent } from './Pages/Client/panier/panier.component';
 import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaurant-crud.component';
-import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
+import { PlatsCrudComponent } from './Pages/Restaurant/plats-crud/plats-crud.component';
 import { CommandesComponent } from './Pages/Ekaly/commandes/commandes.component';
 import { DragDropComponent } from './Pages/Livreur/drag-drop/drag-drop.component';
 import { CommandListComponent } from './Pages/Restaurant/command-list/command-list.component';

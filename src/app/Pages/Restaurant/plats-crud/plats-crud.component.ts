@@ -1,13 +1,11 @@
+import { SharedService } from './../../../Services/shared.service';
 import { Response } from './../../../Models/token';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Profil } from 'src/app/Models/profil';
-import { PROFIL_TYPE } from 'src/app/Models/shared';
 import { Plat } from 'src/app/Models/plat';
-import { ProfilService } from 'src/app/Services/profil.service';
 import { RestaurantService } from 'src/app/Services/restaurant.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-plats-crud',
@@ -19,7 +17,6 @@ export class PlatsCrudComponent implements OnInit {
   
   public apiUrl: string = environment.upload;
   public platesForm! : FormGroup;
-  public indice!: number;
   public restaurant!: Profil;
   public plat: Plat =  new Plat("","Burger",100,200,"Burger Burger","Burger");
   public formData: FormData = new FormData() ;
@@ -35,10 +32,16 @@ export class PlatsCrudComponent implements OnInit {
   constructor( 
     private builder : FormBuilder,
     private restaurantServ: RestaurantService,
-    private activatedRoute : ActivatedRoute
+    private sharedServ: SharedService
      ) {
       this.setForm();
      }
+
+  getRestaurantPlates(): void{
+    this.restaurant  = this.sharedServ.getUserLocal();
+    this.plates = this.restaurant.plats;
+  }
+  
 
   public setForm(): void{
     this.platesForm = this.builder.group({
@@ -55,21 +58,6 @@ export class PlatsCrudComponent implements OnInit {
     this.action = true;
     this.setForm();
   }
-
-  getRestaurantPlates(){
-    this.restaurantServ.findRestaurantById(this.activatedRoute.snapshot.paramMap.get("id"))
-      .subscribe((res: Response) =>{
-        console.log(res);
-          if(res.code === 202){
-            this.restaurant = res.data;
-            this.plates = this.restaurant.plats;
-            console.log(this.restaurant);
-          }
-        }
-       );
-  }
-  
-  
 
   public getFormValue(){
     console.log(this.platesForm.value);

@@ -1,3 +1,4 @@
+import { CartService } from './../../../Services/cart.service';
 import { SharedService } from './../../../Services/shared.service';
 import { Response } from './../../../Models/token';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,8 @@ export class CommandListComponent implements OnInit {
 
   constructor(
     private commandeServ: CommandService,
-    private sharedServ: SharedService
+    private sharedServ: SharedService,
+    private cartServ: CartService
   ) { }
 
   ngOnInit(): void {
@@ -32,11 +34,13 @@ export class CommandListComponent implements OnInit {
   }
 
   findRestoCommand(): void{
-    this.commandeServ.findRestoCommands(this.user).subscribe((res: Response) => {
+    this.commandeServ.findRestoCommands(this.user.id).subscribe((res: Response) => {
         if(res.code === 202){
           this.commands = res.data;
-          console.log(this.commands);
         }
+        this.commands.forEach(cart => {
+          this.cartServ.setTotalPrice(cart);
+        });
       });
     }
 
