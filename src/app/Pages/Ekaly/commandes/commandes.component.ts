@@ -28,8 +28,7 @@ export class CommandesComponent implements OnInit {
   }
 
   findEkalyCommand(){
-    this.commandeServ.findEkalyCommands()
-      .subscribe((res: Response) => {
+    this.commandeServ.findEkalyCommands().subscribe((res: Response) => {
         if(res.code === 202){
           this.commands = res.data;
           console.log(this.commands);

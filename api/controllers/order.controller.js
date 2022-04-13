@@ -12,8 +12,10 @@ const orderController = (url, router) => {
     orderService.getAllOrders().then( (orders) => response.success(res, orders, "Orders selected"))
   });
 
-  router.get(`${url}/restaurant`, (req, res) => {
-    orderService.findOrderOfRestaurant().then( (orders) => response.success(res, orders, "Orders selected"))
+  router.get(`${url}/restaurant/:restoId`, (req, res) => {
+    const param = req.param;
+    console.log("parametre: "+param.restoId);
+    orderService.findOrderOfRestaurant(param.restoId).then( (orders) => response.success(res, orders, "Orders selected"))
   });
 
   router.post(`${url}/deliverer`, (req, res) => {

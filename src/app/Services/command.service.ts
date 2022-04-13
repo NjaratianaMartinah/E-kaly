@@ -29,4 +29,9 @@ export class CommandService {
         return this.dataServ.getData(this.url.concat("/orders/deliverer/"+profil));
     }
 
+    public findRestoCommands(profil: any): Observable<Response>{
+      console.log("sdfhskqdf");
+      return this.dataServ.getData(this.url.concat("/orders/restaurant/"+profil));
+    }
+
 }

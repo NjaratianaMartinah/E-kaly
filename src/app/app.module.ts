@@ -14,6 +14,7 @@ import { RestaurantCrudComponent } from './Pages/Shared/restaurant-crud/restaura
 import { PlatsCrudComponent } from './Pages/Shared/plats-crud/plats-crud.component';
 import { CommandesComponent } from './Pages/Ekaly/commandes/commandes.component';
 import { DragDropComponent } from './Pages/Livreur/drag-drop/drag-drop.component';
+import { CommandListComponent } from './Pages/Restaurant/command-list/command-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DragDropComponent } from './Pages/Livreur/drag-drop/drag-drop.component
     RestaurantCrudComponent,
     PlatsCrudComponent,
     CommandesComponent,
-    DragDropComponent
+    DragDropComponent,
+    CommandListComponent
   ],
   imports: [
     BrowserModule,
