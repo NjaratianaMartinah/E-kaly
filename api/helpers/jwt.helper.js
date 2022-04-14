@@ -8,7 +8,7 @@ function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
-    if (token == null) return res.error(res, "Missing token", 401);
+    if (token == null) return res.sendStatus(res, "Missing token", 401);
 
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
         console.log(err)

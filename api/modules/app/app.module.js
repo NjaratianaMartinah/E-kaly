@@ -6,7 +6,7 @@ const jwt = require('../../helpers/jwt.helper');
 const errorHandler = require('../../helpers/errorHandler.helper');
 const app = express();
 
-jwt.authenticateToken.unless = expressUnless;
+// jwt.authenticateToken.unless = expressUnless;
 
 app.use( cors());
 app.use((req, res, next) =>{
