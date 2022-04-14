@@ -33,16 +33,16 @@ app.use(fileUpload({
 app.use('/uploads', express.static('uploads'));
 app.use(express.static('dist/ekaly-fo'));
 
-app.use(jwt.authenticateToken.unless({
-  path: [
-    {url: "/api/user/login", methods: ['POST']},
-    {url: "/api/user/register", methods: ['POST']},
-    {url: "/ekaly/*", methods: ['POST','GET']},
-    {url: "/ekaly/", methods: ['POST','GET']},
-    {url: "/assets/", methods: ['POST','GET']},
-    {url: "/assets/*", methods: ['POST','GET']}
-  ]
-}))
+// app.use(jwt.authenticateToken.unless({
+//   path: [
+//     {url: "/api/user/login", methods: ['POST']},
+//     {url: "/api/user/register", methods: ['POST']},
+//     {url: "/ekaly/*", methods: ['POST','GET']},
+//     {url: "/ekaly/", methods: ['POST','GET']},
+//     {url: "/assets/", methods: ['POST','GET']},
+//     {url: "/assets/*", methods: ['POST','GET']}
+//   ]
+// }))
 
 app.use(express.json());
 app.use(express.urlencoded( { extended : false }));
